@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MaxxiDoctor | Inteligência em Alíquotas de Saúde</title>
+    <title>MaxxiDoctor | Contabilidade Consultiva para Saúde</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Barlow -->
@@ -44,29 +44,30 @@
             box-shadow: 0 0 25px -5px rgba(241, 4, 4, 0.45);
         }
         
-        /* Estilização Premium e Visível para o Slider (Range) */
+        /* Estilização de Alto Impacto para a Trilha e o Botão do Simulador */
         input[type=range]::-webkit-slider-runnable-track {
-            background: #3a0b0b;
-            height: 12px;
+            background: #110000;
+            height: 14px;
             border-radius: 9999px;
-            border: 1px solid rgba(241, 4, 4, 0.3);
+            border: 1px solid rgba(241, 4, 4, 0.4);
         }
         input[type=range]::-moz-range-track {
-            background: #3a0b0b;
-            height: 12px;
+            background: #110000;
+            height: 14px;
             border-radius: 9999px;
-            border: 1px solid rgba(241, 4, 4, 0.3);
+            border: 1px solid rgba(241, 4, 4, 0.4);
         }
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none;
             background: #F10404;
-            height: 24px;
-            width: 24px;
+            height: 26px;
+            width: 26px;
             border-radius: 9999px;
             margin-top: -6px;
             cursor: pointer;
-            box-shadow: 0 0 15px #F10404;
-            transition: transform 0.1s, background-color 0.2s;
+            box-shadow: 0 0 18px #F10404;
+            border: 2px solid #FFFFFF;
+            transition: transform 0.1s ease, background-color 0.2s;
         }
         input[type=range]::-webkit-slider-thumb:hover {
             transform: scale(1.2);
@@ -74,35 +75,37 @@
         }
         input[type=range]::-moz-range-thumb {
             background: #F10404;
-            height: 24px;
-            width: 24px;
+            height: 26px;
+            width: 26px;
             border-radius: 9999px;
-            border: none;
+            border: 2px solid #FFFFFF;
             cursor: pointer;
-            box-shadow: 0 0 15px #F10404;
-            transition: transform 0.1s, background-color 0.2s;
+            box-shadow: 0 0 18px #F10404;
+            transition: transform 0.1s ease, background-color 0.2s;
         }
         input[type=range]::-moz-range-thumb:hover {
             transform: scale(1.2);
             background: #ff3b3b;
         }
 
-        /* Classes de Animação Otimizadas para Scroll */
+        /* Mecanismo de Animação e Fluidez ao Scroll */
         .reveal {
             opacity: 0;
-            transform: translateY(30px) scale(0.98);
-            transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            transform: translateY(40px) scale(0.99);
+            will-change: transform, opacity;
+            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .reveal.active {
             opacity: 1;
             transform: translateY(0) scale(1);
         }
 
-        /* Efeito cascata para os itens de checklist */
+        /* Itens em Cascata Otimizados */
         .cascade-item {
             opacity: 0;
-            transform: translateX(-20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            transform: translateX(-15px);
+            will-change: transform, opacity;
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .cascade-item.active {
             opacity: 1;
@@ -123,7 +126,7 @@
     <!-- MAIN HEADER -->
     <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <!-- LOGO BRAND -->
+            <!-- LOGO BRAND (Subtítulo atualizado) -->
             <a href="#" class="flex items-center gap-3 group">
                 <img src="./logo.png" alt="Logo MaxxiDoctor" class="w-11 h-11 object-contain transition-transform duration-300 group-hover:scale-105">
                 <div>
@@ -131,23 +134,13 @@
                         <span class="text-xl font-extrabold text-brand-dark tracking-tight">Maxxi</span>
                         <span class="text-xl font-semibold text-brand-red tracking-tight">Doctor</span>
                     </div>
-                    <span class="text-[9px] uppercase tracking-widest text-slate-400 font-bold block -mt-1">Inteligência Tributária</span>
+                    <span class="text-[9px] uppercase tracking-widest text-slate-400 font-bold block -mt-1">Contabilidade Consultiva</span>
                 </div>
             </a>
 
-            <!-- PERSISTENT NAV TABS (DESKTOP) -->
-            <nav class="hidden lg:flex items-center gap-1 bg-slate-100 p-1.5 rounded-full border border-slate-200">
-                <button onclick="switchView('landing')" id="tab-landing" class="px-5 py-2 text-sm font-semibold rounded-full transition-all duration-300 bg-white text-brand-dark shadow-sm">
-                    <i class="fa-solid fa-calculator mr-2 text-brand-red"></i>Auditoria de Alíquotas (Site)
-                </button>
-                <button onclick="switchView('competitors')" id="tab-competitors" class="px-5 py-2 text-sm font-medium rounded-full transition-all duration-300 text-slate-600 hover:text-brand-dark">
-                    <i class="fa-solid fa-chart-line mr-2 text-brand-red"></i>Painel de Concorrentes <span class="ml-1 px-2 py-0.5 text-[10px] bg-brand-red/20 text-brand-red rounded-full font-bold">11</span>
-                </button>
-            </nav>
-
             <!-- RIGHT CTA BUTTONS -->
             <div class="flex items-center gap-3">
-                <a href="#diagnostico" class="hidden sm:inline-flex items-center justify-center px-4 py-2.5 text-xs md:text-sm font-extrabold text-white bg-brand-red hover:bg-brand-red/90 transition-all duration-300 rounded-lg shadow-sm hover:scale-105">
+                <a href="#diagnostico" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 text-xs md:text-sm font-extrabold text-white bg-brand-red hover:bg-brand-red/90 transition-all duration-300 rounded-lg shadow-sm hover:scale-105">
                     Auditar Minha Alíquota
                 </a>
                 <a href="https://wa.me/5543991220022?text=Ol%C3%A1%2C%20gostaria%20de%20fazer%20uma%20auditoria%20gratuita%20de%20al%C3%ADquotas%20com%20a%20MaxxiDoctor." target="_blank" class="p-2.5 bg-red-50 hover:bg-red-100 text-brand-red rounded-lg border border-red-100 transition-all duration-300 flex items-center justify-center hover:scale-105" title="Falar no WhatsApp">
@@ -163,14 +156,6 @@
 
         <!-- MOBILE NAV DROPDOWN -->
         <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-slate-100 py-4 px-6 flex flex-col gap-3 shadow-lg transition-all duration-300">
-            <div class="bg-slate-50 p-1 rounded-xl flex w-full mb-2">
-                <button onclick="switchView('landing'); toggleMobileMenu();" id="mob-tab-landing" class="flex-1 py-2 text-center text-xs font-semibold rounded-lg bg-white text-brand-dark shadow-sm">
-                    Simulador Alíquotas
-                </button>
-                <button onclick="switchView('competitors'); toggleMobileMenu();" id="mob-tab-competitors" class="flex-1 py-2 text-center text-xs font-medium rounded-lg text-slate-600">
-                    Concorrentes (11)
-                </button>
-            </div>
             <a href="#problema" class="text-sm font-medium text-slate-600 py-1" onclick="toggleMobileMenu()">Gargalos Tributários</a>
             <a href="#diagnostico" class="text-sm font-medium text-slate-600 py-1" onclick="toggleMobileMenu()">Diagnóstico Gratuito</a>
             <a href="#autoridade" class="text-sm font-medium text-slate-600 py-1" onclick="toggleMobileMenu()">Por que MaxxiDoctor</a>
@@ -186,41 +171,24 @@
 
     <main>
 
-        <!-- VIEW 1: LANDING PAGE -->
-        <div id="view-landing" class="block transition-all duration-500">
+        <!-- MAIN LANDING VIEW -->
+        <div id="view-landing" class="block">
             
-            <!-- AB TEST SELECTOR BAR -->
-            <section class="bg-[#120000] text-slate-300 py-3.5 px-4 border-b border-brand-red/10">
-                <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
-                    <div class="flex items-center gap-2">
-                        <span class="px-2 py-0.5 bg-brand-red text-white text-[10px] font-bold rounded tracking-wider uppercase">Teste A/B de Copy de Alíquota</span>
-                        <p class="text-xs text-slate-400">Alternar copy focado em diferentes cenários de alíquota tributária:</p>
-                    </div>
-                    <div class="flex flex-wrap gap-1 bg-[#090000] p-1 rounded-lg border border-brand-red/15">
-                        <button onclick="selectHeroVariation(1)" id="btn-var-1" class="px-3 py-1 text-xs rounded font-medium transition-all bg-brand-red text-white">V1: Pequenas Cirurgias</button>
-                        <button onclick="selectHeroVariation(2)" id="btn-var-2" class="px-3 py-1 text-xs rounded font-medium transition-all text-slate-400 hover:text-white">V2: Segurança + Economia</button>
-                        <button onclick="selectHeroVariation(3)" id="btn-var-3" class="px-3 py-1 text-xs rounded font-medium transition-all text-slate-400 hover:text-white">V3: Médico PJ</button>
-                        <button onclick="selectHeroVariation(4)" id="btn-var-4" class="px-3 py-1 text-xs rounded font-medium transition-all text-slate-400 hover:text-white">V4: Clínica e Margem</button>
-                    </div>
-                </div>
-            </section>
-
             <!-- SECTION 1: HERO / HEADLINE -->
-            <section class="relative bg-[#1F0000] text-white pt-12 pb-24 lg:pt-20 lg:pb-32 overflow-hidden">
+            <section class="relative bg-[#1F0000] text-white pt-16 pb-24 lg:pt-24 lg:pb-32 overflow-hidden">
                 <div class="absolute top-1/2 left-1/4 -translate-y-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-brand-red/5 rounded-full blur-[120px] pointer-events-none"></div>
                 <div class="absolute top-1/3 right-0 w-[400px] h-[400px] bg-brand-red/10 rounded-full blur-[100px] pointer-events-none"></div>
                 
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <div class="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
                         
-                        <!-- Left text area with variations -->
+                        <!-- Left text area (V1 Fixa) -->
                         <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
                             <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#300505] border border-brand-red/30 text-brand-red text-xs font-semibold uppercase tracking-wider mx-auto lg:mx-0">
                                 <i class="fa-solid fa-percent text-brand-red animate-pulse"></i> Planejamento Tributário da Saúde
                             </div>
 
-                            <!-- VARIATION 1 -->
-                            <div id="hero-var-1" class="hero-var block transition-all duration-300">
+                            <div id="hero-var-1" class="hero-var block">
                                 <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-5.5xl font-black tracking-tight leading-tight">
                                     Sua clínica realiza <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-red via-red-400 to-white">pequenas cirurgias</span>? Descubra como reduzir impostos com segurança.
                                 </h1>
@@ -234,51 +202,6 @@
                                 </div>
                             </div>
 
-                            <!-- VARIATION 2 -->
-                            <div id="hero-var-2" class="hero-var hidden transition-all duration-300">
-                                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-5.5xl font-black tracking-tight leading-tight">
-                                    Pague menos impostos <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-red to-rose-300">sem colocar sua carreira</span> médica em risco.
-                                </h1>
-                                <p class="mt-4 text-base sm:text-lg md:text-xl text-slate-300 font-light max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                                    Com uma contabilidade consultiva especializada na área da saúde, você reduz custos, evita erros fiscais e ganha previsibilidade para crescer.
-                                </p>
-                                <div class="mt-8">
-                                    <a href="#diagnostico" class="inline-block w-full sm:w-auto px-8 py-4 bg-brand-red hover:bg-brand-red/90 text-white font-extrabold text-base rounded-xl transition-all duration-300 text-center red-glow hover:-translate-y-1">
-                                        Quero pagar menos com segurança <i class="fa-solid fa-shield-halved ml-2 text-sm"></i>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- VARIATION 3 -->
-                            <div id="hero-var-3" class="hero-var hidden transition-all duration-300">
-                                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-5.5xl font-black tracking-tight leading-tight">
-                                    Você abriu CNPJ como médico, mas será que está pagando o <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-white">menor imposto possível</span>?
-                                </h1>
-                                <p class="mt-4 text-base sm:text-lg md:text-xl text-slate-300 font-light max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                                    A MaxxiDoctor analisa seu enquadramento, faturamento, obrigações e possibilidades legais de redução tributária para obter a melhor estrutura para você.
-                                </p>
-                                <div class="mt-8">
-                                    <a href="#diagnostico" class="inline-block w-full sm:w-auto px-8 py-4 bg-brand-red hover:bg-brand-red/90 text-white font-extrabold text-base rounded-xl transition-all duration-300 text-center red-glow hover:-translate-y-1">
-                                        Analisar meu CNPJ agora <i class="fa-solid fa-coins ml-2 text-sm"></i>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- VARIATION 4 -->
-                            <div id="hero-var-4" class="hero-var hidden transition-all duration-300">
-                                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-5.5xl font-black tracking-tight leading-tight">
-                                    Sua clínica cresce, mas os <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-red via-red-300 to-slate-200">impostos continuam engolindo</span> o lucro?
-                                </h1>
-                                <p class="mt-4 text-base sm:text-lg md:text-xl text-slate-300 font-light max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                                    Identifique gargalos tributários, riscos fiscais e oportunidades de economia real com especialistas focados em contabilidade para saúde.
-                                </p>
-                                <div class="mt-8">
-                                    <a href="#diagnostico" class="inline-block w-full sm:w-auto px-8 py-4 bg-brand-red hover:bg-brand-red/90 text-white font-extrabold text-base rounded-xl transition-all duration-300 text-center red-glow hover:-translate-y-1">
-                                        Quero melhorar a margem da minha clínica <i class="fa-solid fa-hospital ml-2 text-sm"></i>
-                                    </a>
-                                </div>
-                            </div>
-
                             <div class="mt-6 flex flex-wrap items-center justify-center lg:justify-start gap-4 text-xs text-slate-400">
                                 <span class="flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-brand-red"></i> Enquadramento Homologado</span>
                                 <span class="hidden sm:inline text-brand-red/30">|</span>
@@ -286,15 +209,15 @@
                             </div>
                         </div>
 
-                        <!-- Right card area: Interactive Premium Aliquot Simulator (Ajustado Cores e Contraste) -->
+                        <!-- Right card area: Interactive Premium Aliquot Simulator -->
                         <div class="lg:col-span-5 relative">
                             <div class="absolute inset-0 bg-gradient-to-tr from-brand-red to-transparent rounded-3xl opacity-10 blur-xl"></div>
-                            <div class="relative bg-[#250101] border border-brand-red/30 rounded-3xl p-6 md:p-8 text-white shadow-2xl">
+                            <div class="relative bg-[#2D0303] border border-brand-red/40 rounded-3xl p-6 md:p-8 text-white shadow-2xl">
                                 <div class="absolute top-4 right-4 bg-brand-red text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
                                     Simulador Técnico
                                 </div>
                                 <h3 class="text-lg font-bold flex items-center gap-2 text-slate-100 mb-2">
-                                    <i class="fa-solid fa-slider text-brand-red animate-pulse"></i>
+                                    <i class="fa-solid fa-sliders text-brand-red animate-pulse"></i>
                                     Simulador de Alíquota Efetiva
                                 </h3>
                                 <p class="text-xs text-slate-300 leading-relaxed mb-6">
@@ -302,25 +225,25 @@
                                 </p>
 
                                 <div class="space-y-6">
-                                    <!-- Faturamento range com ultra-contraste -->
-                                    <div class="bg-[#150000] p-4 rounded-xl border border-brand-red/20">
+                                    <!-- Faturamento range com layout escuro de alta legibilidade -->
+                                    <div class="bg-[#190202] p-4 rounded-xl border border-brand-red/20 shadow-inner">
                                         <div class="flex justify-between items-center text-xs font-semibold text-slate-300 mb-3">
                                             <span class="text-slate-200">Faturamento Mensal:</span>
-                                            <span class="text-white bg-brand-red px-3 py-1 rounded-md text-base font-black font-mono shadow-sm" id="calc-revenue-label">R$ 30.000</span>
+                                            <span class="text-white bg-brand-red px-3 py-1 rounded-md text-base font-black font-mono shadow-md border border-white/10" id="calc-revenue-label">R$ 30.000</span>
                                         </div>
                                         <div class="py-2">
                                             <input type="range" id="revenue-range" min="5000" max="200000" step="5000" value="30000" class="w-full appearance-none cursor-pointer bg-transparent" oninput="calculateAliquots()">
                                         </div>
-                                        <div class="flex justify-between text-[10px] text-slate-400 font-bold mt-1">
+                                        <div class="flex justify-between text-[10px] text-slate-400 font-bold mt-1 tracking-wider">
                                             <span>R$ 5k</span>
-                                            <span class="text-brand-red animate-pulse">◄ ARRASTE PARA COMPARAR ►</span>
+                                            <span class="text-brand-red animate-pulse">◄ MUTE A BARRA PARA CALCULAR ►</span>
                                             <span>R$ 200k+</span>
                                         </div>
                                     </div>
 
                                     <!-- Aliquot selector tabs -->
                                     <div class="grid grid-cols-2 gap-2">
-                                        <button onclick="changeAliquoteProfile('clinica')" id="profile-clinica" class="py-2.5 px-3 text-xs font-bold rounded-lg border border-brand-red bg-brand-red/20 text-white transition-all">
+                                        <button onclick="changeAliquoteProfile('clinica')" id="profile-clinica" class="py-2.5 px-3 text-xs font-bold rounded-lg border border-brand-red bg-brand-red/20 text-white transition-all shadow-sm">
                                             Clínica / Cirurgias (Equiparação)
                                         </button>
                                         <button onclick="changeAliquoteProfile('médico-pj')" id="profile-pj" class="py-2.5 px-3 text-xs font-bold rounded-lg border border-slate-700 bg-transparent text-slate-400 hover:text-white hover:border-slate-500 transition-all">
@@ -329,7 +252,7 @@
                                     </div>
 
                                     <!-- Resultado box -->
-                                    <div class="bg-[#1b0202] border border-brand-red/20 rounded-2xl p-4 space-y-3.5">
+                                    <div class="bg-[#160101] border border-brand-red/30 rounded-2xl p-4 space-y-3.5 shadow-md">
                                         <div class="flex justify-between text-xs text-slate-400">
                                             <span>Alíquota Sem Planejamento:</span>
                                             <span class="text-slate-300 font-semibold font-mono bg-slate-900/60 px-2 py-0.5 rounded" id="label-high-aliquot">15,33%</span>
@@ -341,7 +264,7 @@
                                         <div class="h-px bg-brand-red/10 my-2"></div>
                                         
                                         <!-- Aliquot Difference Banner -->
-                                        <div class="flex justify-between items-center bg-[#150000] p-3 rounded-xl border border-brand-red/20">
+                                        <div class="flex justify-between items-center bg-[#0C0000] p-3 rounded-xl border border-brand-red/20">
                                             <div>
                                                 <p class="text-[10px] uppercase tracking-wider text-slate-400 font-semibold">Sua Economia Anual:</p>
                                                 <p class="text-xl md:text-2xl font-black text-green-400 font-mono" id="calc-savings">R$ 34.200,00</p>
@@ -426,7 +349,7 @@
                                             <span class="text-brand-red">~8,25%</span>
                                         </div>
                                         <div class="w-full bg-slate-100 h-3.5 rounded-full overflow-hidden">
-                                            <div class="bg-brand-red h-full rounded-full" style="width: 54%"></div>
+                                            <div class="bg-brand-red h-full rounded-full animate-pulse" style="width: 54%"></div>
                                         </div>
                                     </div>
 
@@ -446,7 +369,7 @@
                 </div>
             </section>
 
-            <!-- SECTION 2 — Problema (Com Entrada em Cascata nos Checks) -->
+            <!-- SECTION 2 — Problema (Checks entram um por um no scroll) -->
             <section id="problema" class="py-20 bg-brand-bglight relative reveal">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     
@@ -477,7 +400,7 @@
                             </div>
                         </div>
 
-                        <!-- RIGHT COLUMN: Bullets Checklist Animada uma a uma -->
+                        <!-- RIGHT COLUMN: Bullets Checklist Dinâmica -->
                         <div class="lg:col-span-6 space-y-5 bg-white p-6 md:p-8 rounded-2xl border border-slate-200/80 shadow-sm relative">
                             <h3 class="text-base font-bold text-brand-dark pb-2 border-b border-slate-100">
                                 Talvez isso esteja acontecendo com você se:
@@ -506,7 +429,7 @@
                                 </div>
                                 <div class="cascade-item flex items-start gap-3.5 p-3 rounded-xl hover:bg-slate-50 transition-colors duration-200">
                                     <span class="w-6 h-6 rounded-full bg-red-100 text-brand-red flex items-center justify-center font-bold text-xs shrink-0 mt-0.5"><i class="fa-solid fa-check text-[10px]"></i></span>
-                                    <p class="text-sm text-slate-700">Você não sabe se DMED, CNES, alvarás e obrigações estão alinhados.</p>
+                                    <p class="text-sm text-slate-700">Você não sabe se DMED, CNES, alvarás e obrigações estão perfeitamente alinhados.</p>
                                 </div>
                             </div>
 
@@ -641,7 +564,7 @@
                 </div>
             </section>
 
-            <!-- SECTION 4 — Autoridade (Com Contadores Numéricos Animados) -->
+            <!-- SECTION 4 — Autoridade (Números Animados) -->
             <section id="autoridade" class="py-20 bg-white reveal">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     
@@ -654,7 +577,7 @@
                                 Mais de 35 anos cuidando da saúde contábil de médicos, clínicas e consultórios.
                             </h2>
                             <p class="text-slate-600 leading-relaxed text-base">
-                                A MaxxiDoctor nasceu para atender uma dor específica da área da saúde: profissionais altamente qualificados que cuidam de vidas, mas muitas vezes não recebem a orientação contábil e tributária que precisam para proteger seus resultados.
+                                A MaxxiDoctor nasceu para atender uma dor específica da área da saúde: profissionais altamente qualificados que cuidam de vidas, mas muitas vezes não recebem a orientação contábil que precisam para proteger seus resultados financeiros.
                             </p>
 
                             <div class="pt-4">
@@ -665,7 +588,6 @@
                             </div>
                         </div>
 
-                        <!-- Grid de Provas com Números que Contam Sozinhos ao rolar -->
                         <div class="lg:col-span-6 grid sm:grid-cols-2 gap-6">
                             <div class="p-6 bg-slate-50 border border-slate-100 rounded-2xl flex flex-col justify-between hover:bg-white hover:border-brand-red/20 hover:shadow-md transition-all duration-300">
                                 <span class="text-3xl font-extrabold text-brand-dark flex items-center gap-1">
@@ -685,7 +607,7 @@
 
                             <div class="p-6 bg-slate-50 border border-slate-100 rounded-2xl flex flex-col justify-between hover:bg-white hover:border-brand-red/20 hover:shadow-md transition-all duration-300">
                                 <span class="text-3xl font-extrabold text-brand-dark flex items-center gap-1">
-                                    <span class="text-brand-dark">Foco </span><span class="text-brand-red"> 360°</span>
+                                    <span class="text-brand-dark">Foco </span><span class="text-brand-red">360°</span>
                                 </span>
                                 <p class="text-xs font-bold text-slate-700 uppercase tracking-wide mt-2">Médicos e Clínicas</p>
                                 <p class="text-xs text-slate-500 mt-1">Soluções planejadas para consultórios individuais e estruturas hospitalares.</p>
@@ -693,7 +615,7 @@
 
                             <div class="p-6 bg-slate-50 border border-slate-100 rounded-2xl flex flex-col justify-between hover:bg-white hover:border-brand-red/20 hover:shadow-md transition-all duration-300">
                                 <span class="text-3xl font-extrabold text-brand-dark flex items-center gap-1">
-                                    <span class="text-brand-dark">Painel </span><span class="text-brand-red"> Otimizado</span>
+                                    <span class="text-brand-dark">Painel </span><span class="text-brand-red">Otimizado</span>
                                 </span>
                                 <p class="text-xs font-bold text-slate-700 uppercase tracking-wide mt-2">Gestão e Organização</p>
                                 <p class="text-xs text-slate-500 mt-1">Acesso digital moderno para guias e faturamento em tempo real.</p>
@@ -718,7 +640,6 @@
                         <div class="w-16 h-1 bg-brand-red mx-auto rounded-full mt-4"></div>
                     </div>
 
-                    <!-- Grid de Soluções com Efeito Hover Dinâmico -->
                     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                         <div class="bg-white border border-slate-200 p-6 rounded-2xl hover:shadow-xl hover:-translate-y-2 hover:border-brand-red/40 transition-all duration-300 flex flex-col justify-between">
                             <div class="space-y-4">
@@ -769,7 +690,6 @@
                         <div class="w-16 h-1 bg-brand-red mx-auto rounded-full mt-4"></div>
                     </div>
 
-                    <!-- Comparison Table -->
                     <div class="max-w-4xl mx-auto border border-slate-200 rounded-2xl overflow-hidden custom-shadow bg-slate-50 transition-transform duration-300 hover:scale-[1.01]">
                         <div class="grid grid-cols-12 bg-brand-dark text-white p-4 font-bold text-xs sm:text-sm tracking-wide uppercase text-center items-center">
                             <div class="col-span-4 text-left pl-2 sm:pl-4">Atributo de Trabalho</div>
@@ -805,7 +725,7 @@
                 </div>
             </section>
 
-            <!-- SECTION: CASES DE SUCESSO E DEPOIMENTOS -->
+            <!-- SECTION: CASES DE SUCESSO -->
             <section class="py-20 bg-slate-50 reveal">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="max-w-3xl mx-auto text-center mb-16 space-y-4">
@@ -819,7 +739,7 @@
                                 <div class="flex items-center gap-1 text-brand-red"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
                                 <h4 class="font-bold text-slate-800 text-base">"Redução drástica no Simples via Fator R"</h4>
                                 <p class="text-xs text-slate-600 leading-relaxed italic">
-                                    "Prestava plantões médicos por CNPJ e pagava 15,5% de imposto. A MaxxiDoctor assumiu a contabilidade, readequou meu pró-labore e reduziu minha guia para 6%. Retorno financeiro bruto imediato."
+                                    "Prestava plantões médicos por CNPJ e pagava 15,5% de imposto. A MaxxiDoctor assumiu a contabilidade, readequou meu pró-labore e reduziu minha guia para 6%. Retorno financeiro imediato."
                                 </p>
                             </div>
                             <div class="mt-6 pt-4 border-t border-slate-100 flex items-center gap-3">
@@ -853,7 +773,7 @@
                                 <div class="flex items-center gap-1 text-brand-red"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
                                 <h4 class="font-bold text-slate-800 text-base">"Conformidade e Segurança com a DMED"</h4>
                                 <p class="text-xs text-slate-600 leading-relaxed italic">
-                                    "Meu receio era cair em malhas fiscais por conta do cruzamento da DMED dos pacientes. Com o suporte preventivo mensal deles, durmo tranquilo sabendo que o risco fiscal é zero."
+                                    "Meu receio era cair em malhas fiscais por conta do cruzamento da DMED dos pacientes. Com o suporte preventivo mensal deles, durmo tranquila sabendo que o risco fiscal é zero."
                                 </p>
                             </div>
                             <div class="mt-6 pt-4 border-t border-slate-100 flex items-center gap-3">
@@ -883,7 +803,7 @@
                                 <span class="text-brand-red text-sm" id="faq-icon-1"><i class="fa-solid fa-plus"></i></span>
                             </button>
                             <div class="hidden px-5 pb-5 text-xs md:text-sm text-slate-500 border-t border-slate-100 pt-3" id="faq-content-1">
-                                Sim. A análise inicial serve para metrificar a sua situação real e estruturar as possibilidades do seu enquadramento sem custo inicial.
+                                Sim. A análise inicial serve para metrificar a sua situação real e estruturar as possibilidades do seu enquadramento sem custo.
                             </div>
                         </div>
 
@@ -893,7 +813,7 @@
                                 <span class="text-brand-red text-sm" id="faq-icon-2"><i class="fa-solid fa-plus"></i></span>
                             </button>
                             <div class="hidden px-5 pb-5 text-xs md:text-sm text-slate-500 border-t border-slate-100 pt-3" id="faq-content-2">
-                                Sim. O diagnóstico serve exatamente como um contra-laudo para avaliar se existem janelas legais de economia que o seu contador genérico atual não está aproveitando.
+                                Sim. O diagnóstico serve exatamente para avaliar se existem janelas legais de economia que a sua contabilidade atual pode não estar aproveitando.
                             </div>
                         </div>
                     </div>
@@ -918,47 +838,9 @@
 
         </div>
 
-        <!-- VIEW 2: COMPETITOR INTELLIGENCE DASHBOARD -->
-        <div id="view-competitors" class="hidden transition-all duration-500">
-            <section class="py-12 bg-slate-900 text-white min-h-screen">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-                    
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-6 border-b border-slate-800">
-                        <div>
-                            <span class="px-2.5 py-1 bg-brand-red/10 text-brand-red border border-brand-red/20 text-xs font-bold rounded-lg uppercase tracking-wider">Inteligência Comercial</span>
-                            <h1 class="text-2xl sm:text-3xl font-black mt-2">Painel de Benchmarking de Concorrentes</h1>
-                        </div>
-                        <div class="flex flex-wrap gap-3">
-                            <div class="bg-slate-950 px-4 py-2 border border-slate-800 rounded-xl">
-                                <span class="text-[10px] text-slate-400 uppercase font-semibold">Mapeados</span>
-                                <p class="text-xl font-bold text-white">11 Concorrentes</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl">
-                        <div class="hidden lg:block overflow-x-auto">
-                            <table class="w-full text-left text-xs border-collapse">
-                                <thead>
-                                    <tr class="bg-slate-900 text-slate-300 font-bold border-b border-slate-800">
-                                        <th class="p-4 w-32">Prioridade</th>
-                                        <th class="p-4 w-48">Concorrente</th>
-                                        <th class="p-4">Por que analisar / Diferenciais & Copy Tributário</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-slate-800 text-slate-300" id="competitors-table-body"></tbody>
-                            </table>
-                        </div>
-                        <div class="lg:hidden p-4 space-y-4" id="competitors-mobile-list"></div>
-                    </div>
-
-                </div>
-            </section>
-        </div>
-
     </main>
 
-    <!-- REAL BRAND FOOTER -->
+    <!-- FOOTER -->
     <footer class="bg-brand-dark text-slate-400 py-12 border-t border-brand-red/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-12 gap-8">
             <div class="md:col-span-4 space-y-4">
@@ -987,16 +869,6 @@
     </a>
 
     <script>
-        const competitorsData = [
-            { priority: 'Alta', name: 'Contmed', url: 'Contmed', details: 'Forte autoridade de mercado com 26 anos de atuação.' },
-            { priority: 'Alta', name: 'MedAssist', url: 'MedAssist', details: 'Forte apelo comercial focado em teses de redução e equiparação.' },
-            { priority: 'Alta', name: 'Move Online Médicos', url: 'Move Online Medicos', details: 'Forte presença em materiais ricos e conversão digital.' },
-            { priority: 'Alta', name: 'Ilumimed Contabilidade Médica', url: 'Ilumimed', details: 'Benchmark sólido de SEO em Fator R e reforma de 2026.' },
-            { priority: 'Média/Alta', name: 'MarchioriMed', url: 'MarchioriMed', details: 'Copy agressivo derrubando imposto de 15,5% para 6%.' }
-        ];
-
-        let activePriorityFilter = 'all';
-        let searchQuery = '';
         let activeProfile = 'clinica';
 
         function changeAliquoteProfile(profile) {
@@ -1004,10 +876,10 @@
             const btnClinica = document.getElementById('profile-clinica');
             const btnPj = document.getElementById('profile-pj');
             if (profile === 'clinica') {
-                btnClinica.className = "py-2.5 px-3 text-xs font-bold rounded-lg border border-brand-red bg-brand-red/20 text-white transition-all";
+                btnClinica.className = "py-2.5 px-3 text-xs font-bold rounded-lg border border-brand-red bg-brand-red/20 text-white transition-all shadow-sm";
                 btnPj.className = "py-2.5 px-3 text-xs font-bold rounded-lg border-slate-700 bg-transparent text-slate-400 hover:text-white hover:border-slate-500 transition-all";
             } else {
-                btnPj.className = "py-2.5 px-3 text-xs font-bold rounded-lg border border-brand-red bg-brand-red/20 text-white transition-all";
+                btnPj.className = "py-2.5 px-3 text-xs font-bold rounded-lg border border-brand-red bg-brand-red/20 text-white transition-all shadow-sm";
                 btnClinica.className = "py-2.5 px-3 text-xs font-bold rounded-lg border-slate-700 bg-transparent text-slate-400 hover:text-white hover:border-slate-500 transition-all";
             }
             calculateAliquots();
@@ -1036,36 +908,35 @@
             document.getElementById('calc-percentage-drop').innerText = `-${(((highRate - lowRate) / highRate) * 100).toFixed(1)}%`;
         }
 
-        /* 🔄 Mecanismo Avançado de Animações ao Scroll (Intersection Observer) */
+        /* 🔄 Mecanismo Dinâmico de Scroll com Intersection Observer */
         function initScrollAnimations() {
-            // Observer para revelar blocos inteiros
             const revealObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
                         
-                        // Se o bloco tiver itens de checklist filhos, dispara o efeito cascata um a um
+                        // Executa efeito cascata nos itens de checklist
                         const cascadeItems = entry.target.querySelectorAll('.cascade-item');
                         if (cascadeItems.length > 0) {
                             cascadeItems.forEach((item, index) => {
                                 setTimeout(() => {
                                     item.classList.add('active');
-                                }, index * 150); // Delay de 150ms entre cada check
+                                }, index * 120);
                             });
                         }
 
-                        // Se o bloco tiver números de contagem, dispara a contagem regressiva/progressiva
+                        // Executa a contagem progressiva dos números
                         const counters = entry.target.querySelectorAll('.count-up');
                         if (counters.length > 0) {
                             counters.forEach(counter => {
                                 const target = +counter.getAttribute('data-target');
                                 let count = 0;
-                                const speed = target / 40; // Ajusta a velocidade da contagem
+                                const speed = target / 30; 
                                 const updateCount = () => {
                                     count += speed;
                                     if (count < target) {
                                         counter.innerText = Math.floor(count);
-                                        setTimeout(updateCount, 20);
+                                        setTimeout(updateCount, 25);
                                     } else {
                                         counter.innerText = target;
                                     }
@@ -1075,22 +946,9 @@
                         }
                     }
                 });
-            }, { threshold: 0.15 });
+            }, { threshold: 0.12 });
 
             document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-        }
-
-        function switchView(view) {
-            const viewLanding = document.getElementById('view-landing');
-            const viewCompetitors = document.getElementById('view-competitors');
-            if (view === 'landing') {
-                viewLanding.style.display = 'block';
-                viewCompetitors.classList.add('hidden');
-            } else {
-                viewLanding.style.display = 'none';
-                viewCompetitors.classList.remove('hidden');
-                renderCompetitors();
-            }
         }
 
         function toggleMobileMenu() {
@@ -1101,17 +959,6 @@
         function toggleFaq(num) {
             const content = document.getElementById(`faq-content-${num}`);
             content.classList.toggle('hidden');
-        }
-
-        function renderCompetitors() {
-            const tbody = document.getElementById('competitors-table-body');
-            tbody.innerHTML = '';
-            competitorsData.forEach(c => {
-                const tr = document.createElement('tr');
-                tr.className = "border-b border-slate-800 p-4 text-slate-300";
-                tr.innerHTML = `<td class="p-4 font-bold text-brand-red">${c.priority}</td><td class="p-4 font-bold">${c.name}</td><td class="p-4 text-xs">${c.details}</td>`;
-                tbody.appendChild(tr);
-            });
         }
 
         function handleFormSubmit(event) {
