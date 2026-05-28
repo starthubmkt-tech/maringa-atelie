@@ -44,7 +44,7 @@
             box-shadow: 0 0 25px -5px rgba(31, 0, 0, 0.35);
         }
 
-        /* Cores do Slider Ajustadas para Contraste */
+        /* Cores do Slider Ajustadas para Contraste e Interatividade */
         input[type=range]::-webkit-slider-runnable-track {
             background: #110000;
             height: 14px;
@@ -87,6 +87,29 @@
             transform: scale(1.2);
             background: #ff3b3b;
         }
+
+        /* Efeitos de Movimentação Dinâmica Otimizados para Scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(35px) scale(0.99);
+            will-change: transform, opacity;
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .cascade-item {
+            opacity: 0;
+            transform: translateX(-15px);
+            will-change: transform, opacity;
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .cascade-item.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
     </style>
 </head>
 <body class="font-sans bg-brand-bglight text-slate-800 antialiased overflow-x-hidden" id="app">
@@ -112,10 +135,10 @@
             </a>
 
             <div class="flex items-center gap-3">
-                <a href="#diagnostico" class="hidden sm:inline-flex items-center justify-center px-4 py-2.5 text-xs md:text-sm font-extrabold text-white bg-brand-red hover:bg-brand-red/90 transition-all duration-300 rounded-lg shadow-sm">
+                <a href="#diagnostico" class="hidden sm:inline-flex items-center justify-center px-4 py-2.5 text-xs md:text-sm font-extrabold text-white bg-brand-red hover:bg-brand-red/90 transition-all duration-300 rounded-lg shadow-sm hover:scale-105">
                     Auditar Minha Alíquota
                 </a>
-                <a href="https://wa.me/5511992345721?text=Ol%C3%A1%2C%20gostaria%20de%20fazer%20uma%20auditoria%20gratuita%20de%20al%C3%ADquotas%20com%20a%20MaxxiDoctor." target="_blank" class="p-2.5 bg-red-50 hover:bg-red-100 text-brand-red rounded-lg border border-red-100 transition-all duration-300 flex items-center justify-center" title="Falar no WhatsApp">
+                <a href="https://wa.me/5511992345721?text=Ol%C3%A1%2C%20gostaria%20de%20fazer%20uma%20auditoria%20gratuita%20de%20al%C3%ADquotas%20com%20a%20MaxxiDoctor." target="_blank" class="p-2.5 bg-red-50 hover:bg-red-100 text-brand-red rounded-lg border border-red-100 transition-all duration-300 flex items-center justify-center hover:scale-105" title="Falar no WhatsApp">
                     <i class="fa-brands fa-whatsapp text-lg"></i>
                 </a>
                 
@@ -142,7 +165,7 @@
     <main>
 
         <div id="view-landing" class="block transition-all duration-500">
-
+            
             <section class="relative bg-[#1F0000] text-white pt-12 pb-24 lg:pt-20 lg:pb-32 overflow-hidden">
                 <div class="absolute top-1/2 left-1/4 -translate-y-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-brand-red/5 rounded-full blur-[120px] pointer-events-none"></div>
                 <div class="absolute top-1/3 right-0 w-[400px] h-[400px] bg-brand-red/10 rounded-full blur-[100px] pointer-events-none"></div>
@@ -155,7 +178,7 @@
                                 <i class="fa-solid fa-percent text-brand-red animate-pulse"></i> Planejamento Tributário da Saúde
                             </div>
 
-                            <div id="hero-var-1" class="block transition-all duration-300">
+                            <div id="hero-var-1" class="hero-var block transition-all duration-300">
                                 <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-5.5xl font-black tracking-tight leading-tight">
                                     Sua clínica realiza <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-red via-red-400 to-white">pequenas cirurgias</span>? Descubra como reduzir impostos com segurança.
                                 </h1>
@@ -195,13 +218,15 @@
                                 </p>
 
                                 <div class="space-y-6">
-                                    <div class="bg-[#190202] p-4 rounded-xl border border-brand-red/20">
-                                        <div class="flex justify-between text-xs font-semibold text-slate-300 mb-2">
-                                            <span>Seu Faturamento Mensal:</span>
-                                            <span class="text-brand-red text-base font-extrabold font-mono" id="calc-revenue-label">R$ 30.000</span>
+                                    <div class="bg-[#190202] p-4 rounded-xl border border-brand-red/20 shadow-inner">
+                                        <div class="flex justify-between items-center text-xs font-semibold text-slate-300 mb-3">
+                                            <span class="text-slate-200">Faturamento Mensal:</span>
+                                            <span class="text-white bg-brand-red px-3 py-1 rounded-md text-base font-black font-mono shadow-md border border-white/10" id="calc-revenue-label">R$ 30.000</span>
                                         </div>
-                                        <input type="range" id="revenue-range" min="5000" max="200000" step="5000" value="30000" class="w-full appearance-none cursor-pointer bg-transparent" oninput="calculateAliquots()">
-                                        <div class="flex justify-between text-[10px] text-slate-500 mt-1 font-bold">
+                                        <div class="py-2">
+                                            <input type="range" id="revenue-range" min="5000" max="200000" step="5000" value="30000" class="w-full appearance-none cursor-pointer bg-transparent" oninput="calculateAliquots()">
+                                        </div>
+                                        <div class="flex justify-between text-[10px] text-slate-400 font-bold mt-1 tracking-wider">
                                             <span>R$ 5k</span>
                                             <span class="text-brand-red animate-pulse">◄ MOVA A BARRA PARA CALCULAR ►</span>
                                             <span>R$ 200k+</span>
@@ -209,38 +234,38 @@
                                     </div>
 
                                     <div class="grid grid-cols-2 gap-2">
-                                        <button onclick="changeAliquoteProfile('clinica')" id="profile-clinica" class="py-2 px-3 text-xs font-bold rounded-lg border border-brand-red bg-brand-red/20 text-white transition-all">
+                                        <button onclick="changeAliquoteProfile('clinica')" id="profile-clinica" class="py-2.5 px-3 text-xs font-bold rounded-lg border border-brand-red bg-brand-red/20 text-white transition-all shadow-sm">
                                             Clínica / Cirurgias (Equiparação)
                                         </button>
-                                        <button onclick="changeAliquoteProfile('médico-pj')" id="profile-pj" class="py-2 px-3 text-xs font-bold rounded-lg border-slate-700 bg-transparent text-slate-400 hover:text-white hover:border-slate-500 transition-all">
+                                        <button onclick="changeAliquoteProfile('médico-pj')" id="profile-pj" class="py-2.5 px-3 text-xs font-bold rounded-lg border-slate-700 bg-transparent text-slate-400 hover:text-white hover:border-slate-500 transition-all">
                                             Médico / Plantonista PJ
                                         </button>
                                     </div>
 
-                                    <div class="bg-[#2E0202]/60 border border-brand-red/20 rounded-2xl p-4 space-y-3.5">
+                                    <div class="bg-[#160101] border border-brand-red/30 rounded-2xl p-4 space-y-3.5 shadow-md">
                                         <div class="flex justify-between text-xs text-slate-400">
                                             <span>Alíquota Sem Planejamento:</span>
-                                            <span class="text-slate-300 font-semibold font-mono" id="label-high-aliquot">15,50% (Anexo V)</span>
+                                            <span class="text-slate-300 font-semibold font-mono bg-slate-900/60 px-2 py-0.5 rounded" id="label-high-aliquot">15,33%</span>
                                         </div>
-                                        <div class="flex justify-between text-xs text-slate-400">
-                                            <span>Alíquota Com MaxxiDoctor:</span>
-                                            <span class="text-brand-red font-bold font-mono" id="label-low-aliquot">6,00% (Anexo III)</span>
+                                        <div class="flex justify-between text-xs text-slate-300">
+                                            <span class="font-bold">Alíquota Com MaxxiDoctor:</span>
+                                            <span class="text-white bg-green-700 font-extrabold font-mono px-2 py-0.5 rounded animate-pulse" id="label-low-aliquot">8,25%</span>
                                         </div>
                                         <div class="h-px bg-brand-red/10 my-2"></div>
                                         
-                                        <div class="flex justify-between items-center bg-[#150000]/60 p-3 rounded-xl border border-white/5">
+                                        <div class="flex justify-between items-center bg-[#0C0000] p-3 rounded-xl border border-brand-red/20">
                                             <div>
                                                 <p class="text-[10px] uppercase tracking-wider text-slate-400 font-semibold">Sua Economia Anual:</p>
-                                                <p class="text-xl md:text-2xl font-black text-white" id="calc-savings">R$ 34.200,00</p>
+                                                <p class="text-xl md:text-2xl font-black text-green-400 font-mono" id="calc-savings">R$ 25.488,00</p>
                                             </div>
                                             <div class="text-right">
-                                                <span class="text-xs font-bold text-brand-red block" id="calc-percentage-drop">-61.2%</span>
-                                                <span class="text-[9px] text-slate-500 block">Menos Imposto</span>
+                                                <span class="text-xs font-black text-brand-red block bg-brand-red/10 px-1.5 py-0.5 rounded" id="calc-percentage-drop">-46.2%</span>
+                                                <span class="text-[9px] text-slate-400 block mt-1">Imposto Retido</span>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <a href="#diagnostico" class="block text-center w-full py-3.5 bg-gradient-to-r from-brand-red to-red-800 hover:from-brand-red hover:to-brand-red text-white font-extrabold text-sm rounded-xl transition-all duration-300 shadow-lg red-glow">
+                                    <a href="#diagnostico" class="block text-center w-full py-4 bg-gradient-to-r from-brand-red to-red-800 hover:from-brand-red hover:to-brand-red text-white font-extrabold text-sm uppercase rounded-xl transition-all duration-300 shadow-lg red-glow transform hover:scale-[1.02]">
                                         Garantir Alíquota Reduzida Agora
                                     </a>
                                 </div>
@@ -256,8 +281,7 @@
                     </svg>
                 </div>
             </section>
-
-            <section id="equiparacao-hospitalar" class="py-16 bg-white border-b border-slate-100">
+            <section id="equiparacao-hospitalar" class="py-16 bg-white border-b border-slate-100 reveal">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="bg-gradient-to-br from-brand-bglight to-white rounded-3xl p-8 lg:p-12 border border-slate-200/80 shadow-sm relative overflow-hidden">
                         <div class="absolute top-0 right-0 w-64 h-64 bg-brand-red/5 rounded-full blur-3xl pointer-events-none"></div>
@@ -340,7 +364,7 @@
                 </div>
             </section>
 
-            <section id="problema" class="py-20 bg-brand-bglight relative">
+            <section id="problema" class="py-20 bg-brand-bglight relative reveal">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     
                     <div class="max-w-4xl mx-auto text-center mb-16 space-y-4">
@@ -364,7 +388,7 @@
                                 <img src="./input_file_01.png" alt="Especialista MaxxiDoctor" class="w-full h-auto object-cover transform hover:scale-[1.02] transition-transform duration-500">
                                 <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-brand-dark via-brand-dark/80 to-transparent text-white">
                                     <p class="text-xs text-brand-red font-bold uppercase tracking-wider">Suporte Consultivo</p>
-                                    <p class="text-sm font-semibold text-white mt-1">Empresa especializada na área da saúde com mais de 35 anos de atuação</p>
+                                    <p class="text-sm font-semibold text-white mt-1">Empresa especializada na área da saúde com mais de 35 anos de atuação.</p>
                                 </div>
                             </div>
                         </div>
@@ -374,38 +398,38 @@
                                 Talvez isso esteja acontecendo com você se:
                             </h3>
                             
-                            <div class="space-y-3.5">
-                                <div class="flex items-start gap-3.5 p-3 rounded-xl hover:bg-slate-50 transition-colors duration-200">
+                            <div class="space-y-3.5" id="cascade-container">
+                                <div class="cascade-item flex items-start gap-3.5 p-3 rounded-xl hover:bg-slate-50 transition-colors duration-200">
                                     <span class="w-6 h-6 rounded-full bg-red-100 text-brand-red flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
                                         <i class="fa-solid fa-check text-[10px]"></i>
                                     </span>
                                     <p class="text-sm text-slate-700">Você emite nota corretamente, mas não entende por que paga tanto imposto.</p>
                                 </div>
-                                <div class="flex items-start gap-3.5 p-3 rounded-xl hover:bg-slate-50 transition-colors duration-200">
+                                <div class="cascade-item flex items-start gap-3.5 p-3 rounded-xl hover:bg-slate-50 transition-colors duration-200">
                                     <span class="w-6 h-6 rounded-full bg-red-100 text-brand-red flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
                                         <i class="fa-solid fa-check text-[10px]"></i>
                                     </span>
                                     <p class="text-sm text-slate-700">Seu contador entrega guias, mas não propõe estratégia de redução.</p>
                                 </div>
-                                <div class="flex items-start gap-3.5 p-3 rounded-xl hover:bg-slate-50 transition-colors duration-200">
+                                <div class="cascade-item flex items-start gap-3.5 p-3 rounded-xl hover:bg-slate-50 transition-colors duration-200">
                                     <span class="w-6 h-6 rounded-full bg-red-100 text-brand-red flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
                                         <i class="fa-solid fa-check text-[10px]"></i>
                                     </span>
                                     <p class="text-sm text-slate-700">Você recebe parte como PF, parte como PJ, dividindo plantões, consultas, procedimentos ou convênios.</p>
                                 </div>
-                                <div class="flex items-start gap-3.5 p-3 rounded-xl hover:bg-slate-50 transition-colors duration-200">
+                                <div class="cascade-item flex items-start gap-3.5 p-3 rounded-xl hover:bg-slate-50 transition-colors duration-200">
                                     <span class="w-6 h-6 rounded-full bg-red-100 text-brand-red flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
                                         <i class="fa-solid fa-check text-[10px]"></i>
                                     </span>
                                     <p class="text-sm text-slate-700">Você nunca recebeu uma análise tributária específica para a área da saúde.</p>
                                 </div>
-                                <div class="flex items-start gap-3.5 p-3 rounded-xl hover:bg-slate-50 transition-colors duration-200">
+                                <div class="cascade-item flex items-start gap-3.5 p-3 rounded-xl hover:bg-slate-50 transition-colors duration-200">
                                     <span class="w-6 h-6 rounded-full bg-red-100 text-brand-red flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
                                         <i class="fa-solid fa-check text-[10px]"></i>
                                     </span>
                                     <p class="text-sm text-slate-700">Sua clínica tem faturamento alto, mas a margem parece sempre menor do que deveria.</p>
                                 </div>
-                                <div class="flex items-start gap-3.5 p-3 rounded-xl hover:bg-slate-50 transition-colors duration-200">
+                                <div class="cascade-item flex items-start gap-3.5 p-3 rounded-xl hover:bg-slate-50 transition-colors duration-200">
                                     <span class="w-6 h-6 rounded-full bg-red-100 text-brand-red flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
                                         <i class="fa-solid fa-check text-[10px]"></i>
                                     </span>
@@ -425,180 +449,7 @@
                 </div>
             </section>
 
-            <section id="diagnostico" class="py-20 bg-gradient-to-br from-[#1F0000] via-[#350202] to-[#1F0000] text-white relative">
-                <div class="absolute inset-0 opacity-5 pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
-
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                    
-                    <div class="max-w-3xl mx-auto text-center mb-16 space-y-4">
-                        <span class="px-3.5 py-1.5 rounded-full bg-brand-red/20 border border-brand-red/30 text-brand-red text-xs font-bold uppercase tracking-wider">
-                            Análise Técnica Sem Custo
-                        </span>
-                        <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">
-                            O primeiro passo é descobrir a real situação tributária do seu negócio.
-                        </h2>
-                        <div class="w-16 h-1 bg-brand-red mx-auto rounded-full mt-4"></div>
-                        <p class="text-slate-300 text-base md:text-lg max-w-2xl mx-auto pt-2 leading-relaxed">
-                            No Diagnóstico Tributário Gratuito, a MaxxiDoctor analisa sua realidade atual e identifica possíveis oportunidades de economia, regularização e melhoria na gestão contábil.
-                        </p>
-                    </div>
-
-                    <div class="grid lg:grid-cols-12 gap-12">
-                        
-                        <div class="lg:col-span-7 space-y-6">
-                            <h3 class="text-xl font-bold text-slate-100 flex items-center gap-2">
-                                <span class="w-1.5 h-6 bg-brand-red rounded-full"></span>
-                                O que será analisado minuciosamente:
-                            </h3>
-
-                            <div class="grid sm:grid-cols-2 gap-4">
-                                <div class="bg-white/5 border border-white/10 rounded-2xl p-4 flex gap-3.5 items-start">
-                                    <span class="p-2 bg-brand-red/20 text-brand-red rounded-lg shrink-0">
-                                        <i class="fa-solid fa-arrows-split-up-and-left"></i>
-                                    </span>
-                                    <div>
-                                        <h4 class="font-bold text-sm text-slate-100">Atuação PF vs PJ vs Misto</h4>
-                                        <p class="text-xs text-slate-400 mt-1">Descubra se faz mais sentido atuar como PF, PJ ou estratégia mista de distribuição de receita.</p>
-                                    </div>
-                                </div>
-                                
-                                <div class="bg-white/5 border border-white/10 rounded-2xl p-4 flex gap-3.5 items-start">
-                                    <span class="p-2 bg-brand-red/20 text-brand-red rounded-lg shrink-0">
-                                        <i class="fa-solid fa-sliders"></i>
-                                    </span>
-                                    <div>
-                                        <h4 class="font-bold text-sm text-slate-100">Adequação de Regime</h4>
-                                        <p class="text-xs text-slate-400 mt-1">Verificação técnica se o regime tributário atual (Simples vs Presumido) é adequado ao seu faturamento.</p>
-                                    </div>
-                                </div>
-
-                                <div class="bg-white/5 border border-white/10 rounded-2xl p-4 flex gap-3.5 items-start">
-                                    <span class="p-2 bg-brand-red/20 text-brand-red rounded-lg shrink-0">
-                                        <i class="fa-solid fa-hospital-user"></i>
-                                    </span>
-                                    <div>
-                                        <h4 class="font-bold text-sm text-slate-100">Equiparação Hospitalar</h4>
-                                        <p class="text-xs text-slate-400 mt-1">Avaliamos se existe oportunidade viável de Equiparação Hospitalar para seus procedimentos na clínica.</p>
-                                    </div>
-                                </div>
-
-                                <div class="bg-white/5 border border-white/10 rounded-2xl p-4 flex gap-3.5 items-start">
-                                    <span class="p-2 bg-brand-red/20 text-brand-red rounded-lg shrink-0">
-                                        <i class="fa-solid fa-landmark"></i>
-                                    </span>
-                                    <div>
-                                        <h4 class="font-bold text-sm text-slate-100">Aplicabilidade do ISS Fixo</h4>
-                                        <p class="text-xs text-slate-400 mt-1">Mapeamos se o ISS Fixo Uniprofissional municipal pode ser aplicável ao seu CNPJ médico.</p>
-                                    </div>
-                                </div>
-
-                                <div class="bg-white/5 border border-white/10 rounded-2xl p-4 flex gap-3.5 items-start">
-                                    <span class="p-2 bg-brand-red/20 text-brand-red rounded-lg shrink-0">
-                                        <i class="fa-solid fa-book-bookmark"></i>
-                                    </span>
-                                    <div>
-                                        <h4 class="font-bold text-sm text-slate-100">Auditoria de Livro Caixa</h4>
-                                        <p class="text-xs text-slate-400 mt-1">Verificação se o Livro Caixa da pessoa física está sendo estruturado e usado de forma correta.</p>
-                                    </div>
-                                </div>
-
-                                <div class="bg-white/5 border border-white/10 rounded-2xl p-4 flex gap-3.5 items-start">
-                                    <span class="p-2 bg-brand-red/20 text-brand-red rounded-lg shrink-0">
-                                        <i class="fa-solid fa-file-shield"></i>
-                                    </span>
-                                    <div>
-                                        <h4 class="font-bold text-sm text-slate-100">Conformidade DMED / CNES</h4>
-                                        <p class="text-xs text-slate-400 mt-1">Análise de regularidade se DMED, CNES e obrigações acessórias estão em total conformidade e livres de multas.</p>
-                                    </div>
-                                </div>
-
-                                <div class="bg-white/5 border border-white/10 rounded-2xl p-4 flex gap-3.5 items-start">
-                                    <span class="p-2 bg-brand-red/20 text-brand-red rounded-lg shrink-0">
-                                        <i class="fa-solid fa-triangle-exclamation"></i>
-                                    </span>
-                                    <div>
-                                        <h4 class="font-bold text-sm text-slate-100">Mitigação de Riscos Fiscais</h4>
-                                        <p class="text-xs text-slate-400 mt-1">Cruzamento para entender se há risco iminente de pagamento excessivo ou de problemas fiscais futuros.</p>
-                                    </div>
-                                </div>
-
-                                <div class="bg-white/5 border border-white/10 rounded-2xl p-4 flex gap-3.5 items-start">
-                                    <span class="p-2 bg-brand-red/20 text-brand-red rounded-lg shrink-0">
-                                        <i class="fa-solid fa-circle-dollar-to-slot"></i>
-                                    </span>
-                                    <div>
-                                        <h4 class="font-bold text-sm text-slate-100">Recuperação de Tributos</h4>
-                                        <p class="text-xs text-slate-400 mt-1">Auditoria para verificar se existe possibilidade de recuperar impostos pagos indevidamente nos últimos 5 anos.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="bg-brand-red/10 border border-brand-red/20 rounded-2xl p-6 mt-6">
-                                <p class="text-slate-300 italic text-sm md:text-base leading-relaxed">
-                                    "Você não precisa entender de tributação médica. Você precisa de especialistas que traduzam os números, encontrem oportunidades e mostrem o caminho mais seguro para pagar apenas o necessário."
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="lg:col-span-5">
-                            <div class="bg-white text-slate-800 rounded-3xl p-6 md:p-8 border border-slate-200 shadow-xl relative overflow-hidden">
-                                <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-brand-red to-red-800"></div>
-                                <h3 class="text-xl font-bold text-brand-dark">Auditar Minha Alíquota</h3>
-                                <p class="text-xs text-slate-500 mt-1">Auditoria em 2 minutos. Seguro, confidencial e prático.</p>
-                                
-                                <form id="diag-form" class="mt-6 space-y-4" onsubmit="handleFormSubmit(event)">
-                                    <div>
-                                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Seu Nome Completo:</label>
-                                        <input type="text" required placeholder="Dr(a). ..." class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-red focus:outline-none text-sm transition-all duration-200">
-                                    </div>
-                                    
-                                    <div>
-                                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">WhatsApp de Contato:</label>
-                                        <input type="tel" id="user-phone" required placeholder="(00) 00000-0000" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-red focus:outline-none text-sm transition-all duration-200">
-                                    </div>
-
-                                    <div>
-                                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Estrutura do Negócio:</label>
-                                        <select id="form-structure-select" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-red focus:outline-none text-sm transition-all duration-200">
-                                            <option value="clinica-cirurgia">Clínica que Realiza Pequenas Cirurgias / Procedimentos</option>
-                                            <option value="pj-plantonista">Médico PJ / Plantonista (Quer reduzir para 6%)</option>
-                                            <option value="clinica-presumido">Clínica Geral ou Especializada (Foco Equiparação)</option>
-                                            <option value="pf-autonomo">Profissional Autônomo na Pessoa Física (Quer abrir CNPJ)</option>
-                                        </select>
-                                    </div>
-
-                                    <div>
-                                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Faturamento Mensal Estimado:</label>
-                                        <select class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-red focus:outline-none text-sm transition-all duration-200">
-                                            <option value="ate15">Até R$ 15.000</option>
-                                            <option value="15-50">De R$ 15.000 a R$ 50.000</option>
-                                            <option value="50-100">De R$ 50.000 a R$ 100.000</option>
-                                            <option value="mais100">Mais de R$ 100.000</option>
-                                        </select>
-                                    </div>
-
-                                    <button type="submit" class="w-full py-4 bg-brand-red hover:bg-brand-red/90 text-white font-extrabold text-sm rounded-xl transition-all duration-300 shadow-md uppercase tracking-wider mt-4">
-                                        RECEBER MEU DIAGNÓSTICO GRATUITO
-                                    </button>
-
-                                    <div id="form-success-msg" class="hidden p-3 bg-red-50 border border-red-200 text-brand-red rounded-lg text-xs text-center font-semibold animate-pulse mt-2">
-                                        <i class="fa-solid fa-check-double mr-1"></i> Auditoria iniciada! Redirecionando para o WhatsApp...
-                                    </div>
-
-                                    <div class="text-center text-[10px] text-slate-400 mt-3 flex items-center justify-center gap-1.5">
-                                        <i class="fa-solid fa-shield-halved text-brand-red"></i>
-                                        Sua privacidade é garantida. Sem compromisso. Atendimento pelo WhatsApp.
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-            </section>
-
-            <section id="autoridade" class="py-20 bg-white">
+            <section id="autoridade" class="py-20 bg-white reveal">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     
                     <div class="grid lg:grid-cols-12 gap-12 items-center">
@@ -628,7 +479,7 @@
                             
                             <div class="p-6 bg-slate-50 border border-slate-100 rounded-2xl flex flex-col justify-between hover:bg-white hover:border-brand-red/20 hover:shadow-md transition-all duration-300">
                                 <span class="text-3xl font-extrabold text-brand-dark flex items-center gap-1">
-                                    35+ <span class="text-brand-red">Anos</span>
+                                    <span class="count-up" data-target="35">0</span><span class="text-brand-red">+ Anos</span>
                                 </span>
                                 <p class="text-xs font-bold text-slate-700 uppercase tracking-wide mt-2">Experiência Sólida</p>
                                 <p class="text-xs text-slate-500 mt-1">Três décadas assessorando profissionais de saúde em suas carreiras e estruturas tributárias.</p>
@@ -636,7 +487,7 @@
 
                             <div class="p-6 bg-slate-50 border border-slate-100 rounded-2xl flex flex-col justify-between hover:bg-white hover:border-brand-red/20 hover:shadow-md transition-all duration-300">
                                 <span class="text-3xl font-extrabold text-brand-dark flex items-center gap-1">
-                                    100% <span class="text-brand-red">Saúde</span>
+                                    <span class="count-up" data-target="100">0</span><span class="text-brand-red">% Saúde</span>
                                 </span>
                                 <p class="text-xs font-bold text-slate-700 uppercase tracking-wide mt-2">Especialistas na Área</p>
                                 <p class="text-xs text-slate-500 mt-1">Nossa assessoria é focada estritamente nas regras e normas aplicáveis aos médicos.</p>
@@ -663,8 +514,7 @@
 
                 </div>
             </section>
-
-            <section id="solucoes" class="py-20 bg-brand-bglight relative">
+            <section id="solucoes" class="py-20 bg-brand-bglight relative reveal">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     
                     <div class="max-w-3xl mx-auto text-center mb-16 space-y-4">
@@ -755,7 +605,7 @@
                 </div>
             </section>
 
-            <section id="comparativo" class="py-20 bg-white">
+            <section id="comparativo" class="py-20 bg-white reveal">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     
                     <div class="max-w-3xl mx-auto text-center mb-16 space-y-4">
@@ -768,7 +618,7 @@
                         <div class="w-16 h-1 bg-brand-red mx-auto rounded-full mt-4"></div>
                     </div>
 
-                    <div class="max-w-4xl mx-auto border border-slate-200 rounded-2xl overflow-hidden custom-shadow bg-slate-50">
+                    <div class="max-w-4xl mx-auto border border-slate-200 rounded-2xl overflow-hidden custom-shadow bg-slate-50 transition-transform duration-300 hover:scale-[1.01]">
                         <div class="grid grid-cols-12 bg-brand-dark text-white p-4 font-bold text-xs sm:text-sm tracking-wide uppercase text-center items-center">
                             <div class="col-span-4 text-left pl-2 sm:pl-4">Atributo de Trabalho</div>
                             <div class="col-span-4 text-slate-400 border-l border-white/10">Contabilidade Genérica</div>
@@ -842,7 +692,7 @@
                 </div>
             </section>
 
-            <section class="py-20 bg-slate-50">
+            <section class="py-20 bg-slate-50 reveal">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     
                     <div class="max-w-3xl mx-auto text-center mb-16 space-y-4">
@@ -857,7 +707,7 @@
 
                     <div class="grid md:grid-cols-3 gap-8">
                         
-                        <div class="bg-white p-6 rounded-2xl border border-slate-200 custom-shadow flex flex-col justify-between">
+                        <div class="bg-white p-6 rounded-2xl border border-slate-200 custom-shadow flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1">
                             <div class="space-y-4">
                                 <div class="flex items-center gap-1 text-brand-red">
                                     <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
@@ -876,7 +726,7 @@
                             </div>
                         </div>
 
-                        <div class="bg-white p-6 rounded-2xl border border-slate-200 custom-shadow flex flex-col justify-between">
+                        <div class="bg-white p-6 rounded-2xl border border-slate-200 custom-shadow flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1">
                             <div class="space-y-4">
                                 <div class="flex items-center gap-1 text-brand-red">
                                     <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
@@ -895,7 +745,7 @@
                             </div>
                         </div>
 
-                        <div class="bg-white p-6 rounded-2xl border border-slate-200 custom-shadow flex flex-col justify-between">
+                        <div class="bg-white p-6 rounded-2xl border border-slate-200 custom-shadow flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1">
                             <div class="space-y-4">
                                 <div class="flex items-center gap-1 text-brand-red">
                                     <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
@@ -919,7 +769,180 @@
                 </div>
             </section>
 
-            <section id="faq" class="py-20 bg-white">
+            <section id="diagnostico" class="py-20 bg-gradient-to-br from-[#1F0000] via-[#350202] to-[#1F0000] text-white relative reveal">
+                <div class="absolute inset-0 opacity-5 pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    
+                    <div class="max-w-3xl mx-auto text-center mb-16 space-y-4">
+                        <span class="px-3.5 py-1.5 rounded-full bg-brand-red/20 border border-brand-red/30 text-brand-red text-xs font-bold uppercase tracking-wider">
+                            Análise Técnica Sem Custo
+                        </span>
+                        <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">
+                            O primeiro passo é descobrir a real situação tributária do seu negócio.
+                        </h2>
+                        <div class="w-16 h-1 bg-brand-red mx-auto rounded-full mt-4"></div>
+                        <p class="text-slate-300 text-base md:text-lg max-w-2xl mx-auto pt-2 leading-relaxed">
+                            No Diagnóstico Tributário Gratuito, a MaxxiDoctor analisa sua realidade atual e identifica possíveis oportunidades de economia, regularização e melhoria na gestão contábil.
+                        </p>
+                    </div>
+
+                    <div class="grid lg:grid-cols-12 gap-12">
+                        
+                        <div class="lg:col-span-7 space-y-6">
+                            <h3 class="text-xl font-bold text-slate-100 flex items-center gap-2">
+                                <span class="w-1.5 h-6 bg-brand-red rounded-full"></span>
+                                O que será analisado minuciosamente:
+                            </h3>
+
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div class="bg-white/5 border border-white/10 rounded-2xl p-4 flex gap-3.5 items-start transition-transform duration-300 hover:-translate-y-1">
+                                    <span class="p-2 bg-brand-red/20 text-brand-red rounded-lg shrink-0">
+                                        <i class="fa-solid fa-arrows-split-up-and-left"></i>
+                                    </span>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-slate-100">Atuação PF vs PJ vs Misto</h4>
+                                        <p class="text-xs text-slate-400 mt-1">Descubra se faz mais sentido atuar como PF, PJ ou estratégia mista de distribuição de receita.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white/5 border border-white/10 rounded-2xl p-4 flex gap-3.5 items-start transition-transform duration-300 hover:-translate-y-1">
+                                    <span class="p-2 bg-brand-red/20 text-brand-red rounded-lg shrink-0">
+                                        <i class="fa-solid fa-sliders"></i>
+                                    </span>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-slate-100">Adequação de Regime</h4>
+                                        <p class="text-xs text-slate-400 mt-1">Verificação técnica se o regime tributário atual (Simples vs Presumido) é adequado ao seu faturamento.</p>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white/5 border border-white/10 rounded-2xl p-4 flex gap-3.5 items-start transition-transform duration-300 hover:-translate-y-1">
+                                    <span class="p-2 bg-brand-red/20 text-brand-red rounded-lg shrink-0">
+                                        <i class="fa-solid fa-hospital-user"></i>
+                                    </span>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-slate-100">Equiparação Hospitalar</h4>
+                                        <p class="text-xs text-slate-400 mt-1">Avaliamos se existe oportunidade viável de Equiparação Hospitalar para seus procedimentos na clínica.</p>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white/5 border border-white/10 rounded-2xl p-4 flex gap-3.5 items-start transition-transform duration-300 hover:-translate-y-1">
+                                    <span class="p-2 bg-brand-red/20 text-brand-red rounded-lg shrink-0">
+                                        <i class="fa-solid fa-landmark"></i>
+                                    </span>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-slate-100">Aplicabilidade do ISS Fixo</h4>
+                                        <p class="text-xs text-slate-400 mt-1">Mapeamos se o ISS Fixo Uniprofissional municipal pode ser aplicável ao seu CNPJ médico.</p>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white/5 border border-white/10 rounded-2xl p-4 flex gap-3.5 items-start transition-transform duration-300 hover:-translate-y-1">
+                                    <span class="p-2 bg-brand-red/20 text-brand-red rounded-lg shrink-0">
+                                        <i class="fa-solid fa-book-bookmark"></i>
+                                    </span>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-slate-100">Auditoria de Livro Caixa</h4>
+                                        <p class="text-xs text-slate-400 mt-1">Verificação se o Livro Caixa da pessoa física está sendo estruturado e usado de forma correta.</p>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white/5 border border-white/10 rounded-2xl p-4 flex gap-3.5 items-start transition-transform duration-300 hover:-translate-y-1">
+                                    <span class="p-2 bg-brand-red/20 text-brand-red rounded-lg shrink-0">
+                                        <i class="fa-solid fa-file-shield"></i>
+                                    </span>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-slate-100">Conformidade DMED / CNES</h4>
+                                        <p class="text-xs text-slate-400 mt-1">Análise de regularidade se DMED, CNES e obrigações acessórias estão em total conformidade e livres de multas.</p>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white/5 border border-white/10 rounded-2xl p-4 flex gap-3.5 items-start transition-transform duration-300 hover:-translate-y-1">
+                                    <span class="p-2 bg-brand-red/20 text-brand-red rounded-lg shrink-0">
+                                        <i class="fa-solid fa-triangle-exclamation"></i>
+                                    </span>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-slate-100">Mitigação de Riscos Fiscais</h4>
+                                        <p class="text-xs text-slate-400 mt-1">Cruzamento para entender se há risco iminente de pagamento excessivo ou de problemas fiscais futuros.</p>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white/5 border border-white/10 rounded-2xl p-4 flex gap-3.5 items-start transition-transform duration-300 hover:-translate-y-1">
+                                    <span class="p-2 bg-brand-red/20 text-brand-red rounded-lg shrink-0">
+                                        <i class="fa-solid fa-circle-dollar-to-slot"></i>
+                                    </span>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-slate-100">Recuperação de Tributos</h4>
+                                        <p class="text-xs text-slate-400 mt-1">Auditoria para verificar se existe possibilidade de recuperar impostos pagos indevidamente nos últimos 5 anos.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-brand-red/10 border border-brand-red/20 rounded-2xl p-6 mt-6">
+                                <p class="text-slate-300 italic text-sm md:text-base leading-relaxed">
+                                    "Você não precisa entender de tributação médica. Você precisa de especialistas que traduzam os números, encontrem oportunidades e mostrem o caminho mais seguro para pagar apenas o necessário."
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-5">
+                            <div class="bg-white text-slate-800 rounded-3xl p-6 md:p-8 border border-slate-200 shadow-xl relative overflow-hidden">
+                                <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-brand-red to-red-800"></div>
+                                <h3 class="text-xl font-bold text-brand-dark">Auditar Minha Alíquota</h3>
+                                <p class="text-xs text-slate-500 mt-1">Auditoria em 2 minutos. Seguro, confidencial e prático.</p>
+                                
+                                <form id="diag-form" class="mt-6 space-y-4" onsubmit="handleFormSubmit(event)">
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Seu Nome Completo:</label>
+                                        <input type="text" required placeholder="Dr(a). ..." class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-red focus:outline-none text-sm transition-all duration-200">
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">WhatsApp de Contato:</label>
+                                        <input type="tel" id="user-phone" required placeholder="(00) 00000-0000" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-red focus:outline-none text-sm transition-all duration-200">
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Estrutura do Negócio:</label>
+                                        <select id="form-structure-select" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-red focus:outline-none text-sm transition-all duration-200">
+                                            <option value="clinica-cirurgia">Clínica que Realiza Pequenas Cirurgias / Procedimentos</option>
+                                            <option value="pj-plantonista">Médico PJ / Plantonista (Quer reduzir para 6%)</option>
+                                            <option value="clinica-presumido">Clínica Geral ou Especializada (Foco Equiparação)</option>
+                                            <option value="pf-autonomo">Profissional Autônomo na Pessoa Física (Quer abrir CNPJ)</option>
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Faturamento Mensal Estimado:</label>
+                                        <select class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-red focus:outline-none text-sm transition-all duration-200">
+                                            <option value="ate15">Até R$ 15.000</option>
+                                            <option value="15-50">De R$ 15.000 a R$ 50.000</option>
+                                            <option value="50-100">De R$ 50.000 a R$ 100.000</option>
+                                            <option value="mais100">Mais de R$ 100.000</option>
+                                        </select>
+                                    </div>
+
+                                    <button type="submit" class="w-full py-4 bg-brand-red hover:bg-brand-red/90 text-white font-extrabold text-sm rounded-xl transition-all duration-300 shadow-md uppercase tracking-wider mt-4">
+                                        RECEBER MEU DIAGNÓSTICO GRATUITO
+                                    </button>
+
+                                    <div id="form-success-msg" class="hidden p-3 bg-red-50 border border-red-200 text-brand-red rounded-lg text-xs text-center font-semibold animate-pulse mt-2">
+                                        <i class="fa-solid fa-check-double mr-1"></i> Auditoria iniciada! Redirecionando para o WhatsApp...
+                                    </div>
+
+                                    <div class="text-center text-[10px] text-slate-400 mt-3 flex items-center justify-center gap-1.5">
+                                        <i class="fa-solid fa-shield-halved text-brand-red"></i>
+                                        Sua privacidade é garantida. Sem compromisso. Atendimento pelo WhatsApp.
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+            <section id="faq" class="py-20 bg-white reveal">
                 <div class="max-w-4xl mx-auto px-4 sm:px-6">
                     
                     <div class="text-center mb-16 space-y-4">
@@ -1193,12 +1216,77 @@
             }, 1500);
         }
 
-        // Start animation and calculations on window load
+        // Auto move slider function for dynamic effect on load
+        function autoMoveSlider() {
+            const slider = document.getElementById('revenue-range');
+            let val = parseInt(slider.value);
+            let target = 80000;
+            let direction = 1;
+            
+            const move = setInterval(() => {
+                val += (2500 * direction);
+                slider.value = val;
+                calculateAliquots();
+                
+                if (val >= target && direction === 1) {
+                    direction = -1;
+                    target = 30000;
+                } else if (val <= target && direction === -1) {
+                    clearInterval(move);
+                }
+            }, 50);
+        }
+
+        // Intersection Observer for Scroll Animations
+        function initScrollAnimations() {
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        
+                        // Efeito cascata para itens de checklist
+                        const cascadeItems = entry.target.querySelectorAll('.cascade-item');
+                        if (cascadeItems.length > 0) {
+                            cascadeItems.forEach((item, index) => {
+                                setTimeout(() => {
+                                    item.classList.add('active');
+                                }, index * 120);
+                            });
+                        }
+
+                        // Contador progressivo para números
+                        const counters = entry.target.querySelectorAll('.count-up');
+                        if (counters.length > 0) {
+                            counters.forEach(counter => {
+                                const target = +counter.getAttribute('data-target');
+                                let count = 0;
+                                const speed = target / 30; // ajusta velocidade
+                                const updateCount = () => {
+                                    count += speed;
+                                    if (count < target) {
+                                        counter.innerText = Math.floor(count);
+                                        setTimeout(updateCount, 25);
+                                    } else {
+                                        counter.innerText = target;
+                                    }
+                                };
+                                updateCount();
+                            });
+                        }
+                    }
+                });
+            }, { threshold: 0.12 });
+
+            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+        }
+
+        // Initialize on load
         window.onload = function() {
             calculateAliquots();
+            initScrollAnimations();
+            // Start the auto slider movement after a short delay
+            setTimeout(autoMoveSlider, 1000);
         }
     </script>
 </body>
 </html>
-
-```
