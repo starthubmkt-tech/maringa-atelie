@@ -175,6 +175,7 @@
 
         <div id="view-landing" class="block transition-all duration-500">
             
+            <!-- 1ª página (Hero) -->
             <section class="relative bg-[#1F0000] text-white pt-12 pb-24 lg:pt-20 lg:pb-32 overflow-hidden">
                 <div class="absolute top-1/2 left-1/4 -translate-y-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-brand-red/5 rounded-full blur-[120px] pointer-events-none"></div>
                 <div class="absolute top-1/3 right-0 w-[400px] h-[400px] bg-brand-red/10 rounded-full blur-[100px] pointer-events-none"></div>
@@ -212,24 +213,25 @@
                             </div>
                         </div>
 
+                        <!-- Simulador Revertido para Tema Escuro -->
                         <div class="lg:col-span-5 relative">
                             <div class="absolute inset-0 bg-gradient-to-tr from-brand-red to-transparent rounded-3xl opacity-10 blur-xl"></div>
                             <div class="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-6 pb-8 md:p-8 text-white shadow-2xl">
                                 <div class="absolute top-4 right-4 hidden sm:block bg-brand-red/20 border border-brand-red/30 text-brand-red text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
                                     Simulador Técnico
                                 </div>
-                                <h3 class="text-lg font-bold flex items-center gap-2 text-slate-100 mb-4 pr-0 sm:pr-32">
+                                <h3 class="text-lg font-bold flex items-center gap-2 text-slate-100 mb-6 pr-0 sm:pr-32">
                                     <i class="fa-solid fa-chart-column text-brand-red"></i>
                                     Simulador de Alíquota Efetiva
                                 </h3>
-                                <p class="text-sm text-slate-300 leading-relaxed mb-6">
+                                <p class="text-sm text-slate-300 leading-relaxed mb-8">
                                     Compare o impacto real de alíquotas de acordo com seu faturamento atual e descubra sua economia mensal estimada.
                                 </p>
 
-                                <div class="space-y-6">
+                                <div class="space-y-8">
                                     <div class="bg-[#190202] p-4 rounded-xl border border-brand-red/20 shadow-inner">
                                         <div class="flex justify-between items-center text-sm font-semibold text-slate-300 mb-3">
-                                            <span class="text-slate-700">Faturamento Mensal:</span>
+                                            <span class="text-slate-200">Faturamento Mensal:</span>
                                             <span class="text-white bg-brand-red px-3 py-1 rounded-md text-base font-black font-mono shadow-md border border-white/10" id="calc-revenue-label">R$ 30.000</span>
                                         </div>
                                         <div class="py-2">
@@ -247,7 +249,7 @@
                                             <span>Alíquota Sem Planejamento:</span>
                                             <span class="text-slate-300 font-semibold font-mono bg-slate-900/60 px-2 py-0.5 rounded" id="label-high-aliquot">15,33%</span>
                                         </div>
-                                        <div class="flex justify-between text-sm text-slate-700">
+                                        <div class="flex justify-between text-sm text-slate-300">
                                             <span class="font-bold">Alíquota Com Maxxi Doctor SP:</span>
                                             <span class="text-white bg-green-700 font-extrabold font-mono px-2 py-0.5 rounded animate-pulse" id="label-low-aliquot">8,25%</span>
                                         </div>
@@ -282,6 +284,7 @@
                 </div>
             </section>
 
+            <!-- 2ª página (Equiparação) -->
             <section id="equiparacao-hospitalar" class="py-16 bg-white border-b border-slate-100 reveal">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="bg-gradient-to-br from-brand-bglight to-white rounded-3xl p-8 lg:p-12 border border-slate-200/80 shadow-sm relative overflow-hidden">
@@ -300,7 +303,7 @@
                                     A legislação brasileira permite que empresas médicas organizadas sob o regime do <strong>Lucro Presumido</strong> que realizam pequenos procedimentos invasivos ou cirurgias tenham sua base de cálculo reduzida do IRPJ para 8% e da CSLL para 12%. 
                                 </p>
                                 <p class="text-base sm:text-lg text-slate-600 leading-relaxed">
-                                    Isto significa que a carga global de tributos federais pode ser reduzida em até 70%. Se a sua clínica de cirurgia plástica, dermatologia, oftalmologia, ortopedia ou outra especialização que executa procedimentos e possui licença sanitária, você se enquadra de forma 100% legal na alíquota hospitalar.
+                                    Isto significa que a carga global de tributos federais pode ser reduzida em até 70%. Se a sua clínica de cirurgia plástica, dermatologia, oftalmologia, ortopedia, ou de outras especialidades, executa procedimentos e possui licença sanitária, ela pode ser enquadrada na alíquota hospitalar.
                                 </p>
 
                                 <div class="space-y-3.5 pt-2">
@@ -365,6 +368,7 @@
                 </div>
             </section>
 
+            <!-- 3ª página (Vazamento) -->
             <section id="problema" class="py-20 bg-brand-bglight relative reveal">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     
@@ -452,6 +456,7 @@
                 </div>
             </section>
 
+            <!-- 4ª página (Autoridade) -->
             <section id="autoridade" class="py-20 bg-white reveal">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     
@@ -467,7 +472,7 @@
                                 A Maxxi Doctor SP nasceu para resolver uma demanda crítica na área da saúde: a ausência de uma orientação contábil e tributária mais estratégica para os profissionais do setor.
                             </p>
                             <p class="text-slate-600 leading-relaxed text-base">
-                                Com experiência consultiva, atuação especializada e foco na área da saúde, ajudamos médicos e clínicas a tomar melhores decisões fiscais, reduzir riscos e aumentar a previsibilidade financeira.
+                                Com experiência consultiva, atuação especializada e foco na área da saúde, ajudamos médicos e clínicas a tomarem melhores decisões fiscais, a reduzirem riscos e a aumentarem a previsibilidade financeira.
                             </p>
 
                             <div class="pt-4 flex">
@@ -478,6 +483,7 @@
                             </div>
                         </div>
 
+                        <!-- Cards 2 Linhas -->
                         <div class="lg:col-span-6 grid sm:grid-cols-2 gap-6 items-stretch">
                             
                             <div class="p-6 bg-slate-50 border border-slate-100 rounded-2xl flex flex-col justify-between hover:bg-white hover:border-brand-red/20 hover:shadow-md transition-all duration-300 h-full">
@@ -522,6 +528,7 @@
                 </div>
             </section>
 
+            <!-- 5ª página (Soluções) -->
             <section id="solucoes" class="py-20 bg-brand-bglight relative reveal">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     
@@ -537,6 +544,7 @@
 
                     <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
                         
+                        <!-- Item 1 -->
                         <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-brand-red/35 transition-all duration-300 h-fit">
                             <button onclick="toggleSolucao(1)" class="w-full p-5 text-left flex justify-between items-center gap-3 focus:outline-none">
                                 <span class="flex items-center gap-3">
@@ -550,6 +558,7 @@
                             </div>
                         </div>
 
+                        <!-- Item 2 -->
                         <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-brand-red/35 transition-all duration-300 h-fit">
                             <button onclick="toggleSolucao(2)" class="w-full p-5 text-left flex justify-between items-center gap-3 focus:outline-none">
                                 <span class="flex items-center gap-3">
@@ -563,6 +572,7 @@
                             </div>
                         </div>
 
+                        <!-- Item 3 -->
                         <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-brand-red/35 transition-all duration-300 h-fit">
                             <button onclick="toggleSolucao(3)" class="w-full p-5 text-left flex justify-between items-center gap-3 focus:outline-none">
                                 <span class="flex items-center gap-3">
@@ -576,6 +586,7 @@
                             </div>
                         </div>
 
+                        <!-- Item 4 -->
                         <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-brand-red/35 transition-all duration-300 h-fit">
                             <button onclick="toggleSolucao(4)" class="w-full p-5 text-left flex justify-between items-center gap-3 focus:outline-none">
                                 <span class="flex items-center gap-3">
@@ -589,6 +600,7 @@
                             </div>
                         </div>
 
+                        <!-- Item 5 -->
                         <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-brand-red/35 transition-all duration-300 h-fit">
                             <button onclick="toggleSolucao(5)" class="w-full p-5 text-left flex justify-between items-center gap-3 focus:outline-none">
                                 <span class="flex items-center gap-3">
@@ -602,6 +614,7 @@
                             </div>
                         </div>
 
+                        <!-- Item 6 -->
                         <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-brand-red/35 transition-all duration-300 h-fit">
                             <button onclick="toggleSolucao(6)" class="w-full p-5 text-left flex justify-between items-center gap-3 focus:outline-none">
                                 <span class="flex items-center gap-3">
@@ -615,6 +628,7 @@
                             </div>
                         </div>
 
+                        <!-- Item 7 -->
                         <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-brand-red/35 transition-all duration-300 h-fit">
                             <button onclick="toggleSolucao(7)" class="w-full p-5 text-left flex justify-between items-center gap-3 focus:outline-none">
                                 <span class="flex items-center gap-3">
@@ -628,6 +642,7 @@
                             </div>
                         </div>
 
+                        <!-- Item 8 -->
                         <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-brand-red/35 transition-all duration-300 h-fit">
                             <button onclick="toggleSolucao(8)" class="w-full p-5 text-left flex justify-between items-center gap-3 focus:outline-none">
                                 <span class="flex items-center gap-3">
@@ -653,6 +668,7 @@
                 </div>
             </section>
 
+            <!-- 6ª página (Comparativo) -->
             <section id="comparativo" class="py-20 bg-white reveal">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     
@@ -686,16 +702,16 @@
                             <div class="col-span-3 font-bold text-slate-700 pl-1.5 sm:pl-4">Segmentação de Saúde</div>
                             <div class="col-span-4 text-slate-600 border-l border-slate-200/60 pl-1.5 sm:pl-4 pr-1">Desconhece as particularidades médicas</div>
                             <div class="col-span-5 text-brand-dark font-semibold border-l border-slate-200/60 pl-1.5 sm:pl-4 pr-1 sm:pr-2 flex items-start justify-between gap-1 sm:gap-1.5">
-                                <span>Especialista no ecossistema e na legislação da saúde</span>
+                                <span>Especialista na legislação e nas demandas da área da saúde.</span>
                                 <span class="text-emerald-500 shrink-0 mt-0.5"><i class="fa-solid fa-circle-check text-xs sm:text-sm"></i></span>
                             </div>
                         </div>
 
                         <div class="grid grid-cols-12 p-2 sm:p-4 text-[11px] sm:text-sm border-b border-slate-200 items-start text-left">
                             <div class="col-span-3 font-bold text-slate-700 pl-1.5 sm:pl-4">Prevenção e Agilidade</div>
-                            <div class="col-span-4 text-slate-600 border-l border-slate-200/60 pl-1.5 sm:pl-4 pr-1">Espera o problem acontecer</div>
+                            <div class="col-span-4 text-slate-600 border-l border-slate-200/60 pl-1.5 sm:pl-4 pr-1">Espera o problema acontecer</div>
                             <div class="col-span-5 text-brand-dark font-semibold border-l border-slate-200/60 pl-1.5 sm:pl-4 pr-1 sm:pr-2 flex items-start justify-between gap-1 sm:gap-1.5">
-                                <span>Antecipa riscos fiscais e identifica oportunidades de economia</span>
+                                <span>Antecipa riscos fiscais e identifica oportunidades de economia.</span>
                                 <span class="text-emerald-500 shrink-0 mt-0.5"><i class="fa-solid fa-circle-check text-xs sm:text-sm"></i></span>
                             </div>
                         </div>
@@ -742,6 +758,7 @@
                 </div>
             </section>
 
+            <!-- 7ª página (Prova Social) -->
             <section class="py-20 bg-slate-50 reveal">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     
@@ -783,7 +800,7 @@
                                 </div>
                                 <h4 class="font-bold text-slate-800 text-base">"Processo de Equiparação Hospitalar Exitoso"</h4>
                                 <p class="text-sm text-slate-600 leading-relaxed italic">
-                                    "Nossa clínica dermatológica e cirúrgica operava no Lucro Presumido sem usufruir de nenhum benefício. Os especialistas da Maxxi Doctor SP realizam a adequação jurídica no nosso contrato social e nos enquadraram na Equiparação Hospitalar. Nossa base do IRPJ caiu e nossa margem de lucro subiu significativamente."
+                                    "Nossa clínica dermatológica e cirúrgica operava no Lucro Presumido sem usufruir de nenhum benefício. Os especialistas da Maxxi Doctor SP realizaram a adequação jurídica no nosso contrato social e nos enquadraram na Equiparação Hospitalar. Nossa base do IRPJ caiu e nossa margem de lucro subiu significativamente."
                                 </p>
                             </div>
                             <div class="mt-6 pt-4 border-t border-slate-100 flex items-center gap-3">
@@ -819,6 +836,7 @@
                 </div>
             </section>
 
+            <!-- 8ª página (Diagnóstico) -->
             <section id="diagnostico" class="py-20 bg-gradient-to-br from-[#1F0000] via-[#350202] to-[#1F0000] text-white relative reveal">
                 <div class="absolute inset-0 opacity-5 pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
 
@@ -991,6 +1009,7 @@
                 </div>
             </section>
 
+            <!-- 9ª página (FAQ) -->
             <section id="faq" class="py-20 bg-white reveal">
                 <div class="max-w-4xl mx-auto px-4 sm:px-6">
                     
@@ -1081,6 +1100,7 @@
                 </div>
             </section>
 
+            <!-- 10ª página (CTA final) -->
             <section class="py-24 bg-gradient-to-b from-[#150000] to-brand-dark text-white relative">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-8">
                     
@@ -1113,6 +1133,7 @@
 
     </main>
 
+    <!-- Footer -->
     <footer class="bg-brand-dark text-slate-400 py-12 border-t border-brand-red/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-12 gap-8">
             
