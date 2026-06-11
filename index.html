@@ -34,6 +34,17 @@
         .custom-shadow {
             box-shadow: 0 10px 35px -10px rgba(31, 0, 0, 0.12);
         }
+        /* === Otimizações de leveza e responsividade (sem alterar o visual) === */
+        /* Evita scroll horizontal acidental e travamento de rolagem em mobile */
+        html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; overscroll-behavior-y: none; }
+        body { overflow-x: hidden; }
+        img, svg { max-width: 100%; }
+        /* Promove os blurs decorativos para camada própria de GPU (repaint mais barato) */
+        .gpu-layer { transform: translateZ(0); will-change: transform; }
+        /* Renderização sob demanda: o navegador só pinta seções perto da viewport.
+           Ganho grande de performance, invisível ao usuário. Não aplicar na 1ª dobra. */
+        .cv-auto { content-visibility: auto; contain-intrinsic-size: auto 600px; }
+
         .brand-gradient {
             background: linear-gradient(135deg, #1F0000 0%, #3D0202 50%, #F10404 100%);
         }
@@ -122,6 +133,9 @@
             animation: pulse-icon 1.4s ease-in-out infinite; 
         }
 
+        /* Corrige corte do topo da seção ao navegar por âncoras (header fixo h-24) */
+        section[id] { scroll-margin-top: 6.5rem; }
+
         @media (prefers-reduced-motion: reduce) {  
             .reveal, .cascade-item { transition: none; opacity: 1; transform: none; }  
             .icon-blink, .animate-pulse { animation: none; }
@@ -177,8 +191,8 @@
             
             <!-- 1ª página (Hero) -->
             <section class="relative bg-[#1F0000] text-white pt-12 pb-24 lg:pt-20 lg:pb-32 overflow-hidden">
-                <div class="absolute top-1/2 left-1/4 -translate-y-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-brand-red/5 rounded-full blur-[120px] pointer-events-none"></div>
-                <div class="absolute top-1/3 right-0 w-[400px] h-[400px] bg-brand-red/10 rounded-full blur-[100px] pointer-events-none"></div>
+                <div class="gpu-layer absolute top-1/2 left-1/4 -translate-y-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-brand-red/5 rounded-full blur-[120px] pointer-events-none"></div>
+                <div class="gpu-layer absolute top-1/3 right-0 w-[400px] h-[400px] bg-brand-red/10 rounded-full blur-[100px] pointer-events-none"></div>
                 
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <div class="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
@@ -235,12 +249,12 @@
                                             <span class="text-white bg-brand-red px-3 py-1 rounded-md text-base font-black font-mono shadow-md border border-white/10" id="calc-revenue-label">R$ 30.000</span>
                                         </div>
                                         <div class="py-2">
-                                            <input type="range" id="revenue-range" min="5000" max="200000" step="5000" value="30000" class="w-full appearance-none cursor-pointer bg-transparent" oninput="calculateAliquots()">
+                                            <input type="range" id="revenue-range" min="5000" max="500000" step="5000" value="30000" class="w-full appearance-none cursor-pointer bg-transparent" oninput="calculateAliquots()">
                                         </div>
                                         <div class="flex justify-between text-[10px] text-slate-400 font-bold mt-1 tracking-wider">
                                             <span>R$ 5k</span>
                                             <span class="text-brand-red animate-pulse hidden sm:inline">◄ MOVA A BARRA PARA CALCULAR ►</span>
-                                            <span>R$ 200k+</span>
+                                            <span>R$ 500k+</span>
                                         </div>
                                     </div>
 
@@ -285,7 +299,7 @@
             </section>
 
             <!-- 2ª página (Equiparação) -->
-            <section id="equiparacao-hospitalar" class="py-16 bg-white border-b border-slate-100 reveal">
+            <section id="equiparacao-hospitalar" class="cv-auto py-16 bg-white border-b border-slate-100 reveal">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="bg-gradient-to-br from-brand-bglight to-white rounded-3xl p-8 lg:p-12 border border-slate-200/80 shadow-sm relative overflow-hidden">
                         <div class="absolute top-0 right-0 w-64 h-64 bg-brand-red/5 rounded-full blur-3xl pointer-events-none"></div>
@@ -369,7 +383,7 @@
             </section>
 
             <!-- 3ª página (Vazamento) -->
-            <section id="problema" class="py-20 bg-brand-bglight relative reveal">
+            <section id="problema" class="cv-auto py-20 bg-brand-bglight relative reveal">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     
                     <div class="max-w-4xl mx-auto text-center mb-16 space-y-4">
@@ -390,7 +404,7 @@
                         <div class="flex justify-center items-center relative w-full h-full">
                             <div class="absolute inset-0 bg-gradient-to-tr from-brand-red/10 to-transparent rounded-3xl blur-2xl"></div>
                             <div class="relative w-full h-full overflow-hidden rounded-2xl custom-shadow border border-slate-200/50 bg-white flex flex-col justify-between">
-                                <img src="./input_file_01.png" alt="Especialista Maxxi Doctor SP" class="w-full h-full object-cover transform hover:scale-[1.02] transition-transform duration-500 min-h-[300px]">
+                                <img src="./input_file_01.png" alt="Especialista Maxxi Doctor SP" loading="lazy" decoding="async" class="w-full h-full object-cover transform hover:scale-[1.02] transition-transform duration-500 min-h-[300px]">
                                 <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-brand-dark via-brand-dark/80 to-transparent text-white">
                                     <p class="text-sm text-brand-red font-bold uppercase tracking-wider">Suporte Consultivo</p>
                                     <p class="text-base font-semibold text-white mt-1">Empresa especializada na área da saúde com mais de 35 anos de atuação.</p>
@@ -409,6 +423,12 @@
                                         <span class="w-6 h-6 rounded-full bg-red-100 text-brand-red flex items-center justify-center font-bold text-sm shrink-0 mt-0.5">
                                             <i class="fa-solid fa-check text-[10px]"></i>
                                         </span>
+                                        <p class="text-base text-slate-700">Você nunca recebeu uma análise tributária específica para a área da saúde.</p>
+                                    </div>
+                                    <div class="cascade-item flex items-start gap-3.5 p-3 rounded-xl hover:bg-slate-50 transition-colors duration-200">
+                                        <span class="w-6 h-6 rounded-full bg-red-100 text-brand-red flex items-center justify-center font-bold text-sm shrink-0 mt-0.5">
+                                            <i class="fa-solid fa-check text-[10px]"></i>
+                                        </span>
                                         <p class="text-base text-slate-700">Você não tem informações precisas sobre o financeiro da sua clínica.</p>
                                     </div>
                                     <div class="cascade-item flex items-start gap-3.5 p-3 rounded-xl hover:bg-slate-50 transition-colors duration-200">
@@ -416,18 +436,6 @@
                                             <i class="fa-solid fa-check text-[10px]"></i>
                                         </span>
                                         <p class="text-base text-slate-700">Seu contador entrega guias, mas não propõe estratégias de redução de impostos.</p>
-                                    </div>
-                                    <div class="cascade-item flex items-start gap-3.5 p-3 rounded-xl hover:bg-slate-50 transition-colors duration-200">
-                                        <span class="w-6 h-6 rounded-full bg-red-100 text-brand-red flex items-center justify-center font-bold text-sm shrink-0 mt-0.5">
-                                            <i class="fa-solid fa-check text-[10px]"></i>
-                                        </span>
-                                        <p class="text-base text-slate-700">Você recebe parte como PF, parte como PJ, dividindo plantões, consultas, procedimentos ou convênios.</p>
-                                    </div>
-                                    <div class="cascade-item flex items-start gap-3.5 p-3 rounded-xl hover:bg-slate-50 transition-colors duration-200">
-                                        <span class="w-6 h-6 rounded-full bg-red-100 text-brand-red flex items-center justify-center font-bold text-sm shrink-0 mt-0.5">
-                                            <i class="fa-solid fa-check text-[10px]"></i>
-                                        </span>
-                                        <p class="text-base text-slate-700">Você nunca recebeu uma análise tributária específica para a área da saúde.</p>
                                     </div>
                                     <div class="cascade-item flex items-start gap-3.5 p-3 rounded-xl hover:bg-slate-50 transition-colors duration-200">
                                         <span class="w-6 h-6 rounded-full bg-red-100 text-brand-red flex items-center justify-center font-bold text-sm shrink-0 mt-0.5">
@@ -457,7 +465,7 @@
             </section>
 
             <!-- 4ª página (Autoridade) -->
-            <section id="autoridade" class="py-20 bg-white reveal">
+            <section id="autoridade" class="cv-auto py-20 bg-white reveal">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     
                     <div class="grid lg:grid-cols-12 gap-12 items-center">
@@ -529,7 +537,7 @@
             </section>
 
             <!-- 5ª página (Soluções) -->
-            <section id="solucoes" class="py-20 bg-brand-bglight relative reveal">
+            <section id="solucoes" class="cv-auto py-20 bg-brand-bglight relative reveal">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     
                     <div class="max-w-3xl mx-auto text-center mb-16 space-y-4">
@@ -568,7 +576,7 @@
                                 <span class="text-brand-red text-sm shrink-0" id="sol-icon-2"><i class="fa-solid fa-plus"></i></span>
                             </button>
                             <div class="hidden px-5 pb-5 text-sm text-slate-500 leading-relaxed border-t border-slate-100 pt-3" id="sol-content-2">
-                                Análise de receitas e despesas permitidas, Carnê-Leão, organization documental e estratégia para reduzir impostos dentro da legalidade.
+                                Análise de receitas e despesas permitidas, Carnê-Leão, organização documental e estratégia para reduzir impostos dentro da legalidade.
                             </div>
                         </div>
 
@@ -669,7 +677,7 @@
             </section>
 
             <!-- 6ª página (Comparativo) -->
-            <section id="comparativo" class="py-20 bg-white reveal">
+            <section id="comparativo" class="cv-auto py-20 bg-white reveal">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     
                     <div class="max-w-3xl mx-auto text-center mb-16 space-y-4">
@@ -758,86 +766,8 @@
                 </div>
             </section>
 
-            <!-- 7ª página (Prova Social) -->
-            <section class="py-20 bg-slate-50 reveal">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    
-                    <div class="max-w-3xl mx-auto text-center mb-16 space-y-4">
-                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-brand-red/10 text-brand-red text-sm font-bold uppercase tracking-wider">
-                            <i class="fa-solid fa-comments mr-1.5"></i> Prova Social Real
-                        </span>
-                        <h2 class="text-3xl md:text-4xl font-extrabold text-brand-dark tracking-tight">
-                            Economia real e segurança. A experiência de quem escolheu a Maxxi Doctor SP:
-                        </h2>
-                        <div class="w-16 h-1 bg-brand-red mx-auto rounded-full mt-4"></div>
-                    </div>
-
-                    <div class="grid md:grid-cols-3 gap-8">
-                        
-                        <div class="bg-white p-6 rounded-2xl border border-slate-200 custom-shadow flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1">
-                            <div class="space-y-4">
-                                <div class="flex items-center gap-1 text-brand-red">
-                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                                </div>
-                                <h4 class="font-bold text-slate-800 text-base">"Redução drástica no Simples via Fator R"</h4>
-                                <p class="text-sm text-slate-600 leading-relaxed italic">
-                                    "Prestava plantões médicos por CNPJ e pagava 15,5% de alíquota no Simples de forma contínua pelo Anexo V. A Maxxi Doctor SP assumiu a contabilidade, readequou minha folha de pró-labore e reduziu minha guia para 6%. A economia cobriu os custos em apenas dois meses."
-                                </p>
-                            </div>
-                            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-600 text-sm">DC</div>
-                                <div>
-                                    <h5 class="text-sm font-extrabold text-slate-800">Dr. Daniel Cavalcanti</h5>
-                                    <p class="text-xs text-slate-500">Ortopedista e Traumatologista</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-white p-6 rounded-2xl border border-slate-200 custom-shadow flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1">
-                            <div class="space-y-4">
-                                <div class="flex items-center gap-1 text-brand-red">
-                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                                </div>
-                                <h4 class="font-bold text-slate-800 text-base">"Processo de Equiparação Hospitalar Exitoso"</h4>
-                                <p class="text-sm text-slate-600 leading-relaxed italic">
-                                    "Nossa clínica dermatológica e cirúrgica operava no Lucro Presumido sem usufruir de nenhum benefício. Os especialistas da Maxxi Doctor SP realizaram a adequação jurídica no nosso contrato social e nos enquadraram na Equiparação Hospitalar. Nossa base do IRPJ caiu e nossa margem de lucro subiu significativamente."
-                                </p>
-                            </div>
-                            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-600 text-sm">MA</div>
-                                <div>
-                                    <h5 class="text-sm font-extrabold text-slate-800">Dra. Marielle Albuquerque</h5>
-                                    <p class="text-xs text-slate-500">Dermatologista e Sócia-Gestora</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-white p-6 rounded-2xl border border-slate-200 custom-shadow flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1">
-                            <div class="space-y-4">
-                                <div class="flex items-center gap-1 text-brand-red">
-                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                                </div>
-                                <h4 class="font-bold text-slate-800 text-base">"Conformidade e acompanhamento da DMED"</h4>
-                                <p class="text-sm text-slate-600 leading-relaxed italic">
-                                    "Meu maior receio era cruzar despesas dedutíveis do consultório e sofrer notificações da Receita ou malhas cadastrais do CRM. Com a equipe deles, tenho suporte mensal na DMED e controle das guias do Livro Caixa de forma extremamente profissional e sem sustos."
-                                </p>
-                            </div>
-                            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-600 text-sm">GF</div>
-                                <div>
-                                    <h5 class="text-sm font-extrabold text-slate-800">Dr. Guilherme Fontes</h5>
-                                    <p class="text-xs text-slate-500">Pediatra, Consultório Próprio</p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-            </section>
-
             <!-- 8ª página (Diagnóstico) -->
-            <section id="diagnostico" class="py-20 bg-gradient-to-br from-[#1F0000] via-[#350202] to-[#1F0000] text-white relative reveal">
+            <section id="diagnostico" class="cv-auto py-20 bg-gradient-to-br from-[#1F0000] via-[#350202] to-[#1F0000] text-white relative reveal">
                 <div class="absolute inset-0 opacity-5 pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
 
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -1010,7 +940,7 @@
             </section>
 
             <!-- 9ª página (FAQ) -->
-            <section id="faq" class="py-20 bg-white reveal">
+            <section id="faq" class="cv-auto py-20 bg-white reveal">
                 <div class="max-w-4xl mx-auto px-4 sm:px-6">
                     
                     <div class="text-center mb-16 space-y-4">
@@ -1101,7 +1031,7 @@
             </section>
 
             <!-- 10ª página (CTA final) -->
-            <section class="py-24 bg-gradient-to-b from-[#150000] to-brand-dark text-white relative">
+            <section class="cv-auto py-24 bg-gradient-to-b from-[#150000] to-brand-dark text-white relative">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-8">
                     
                     <div class="max-w-3xl mx-auto space-y-4">
@@ -1184,27 +1114,38 @@
     </a>
 
     <script>
-        // Simulador técnico estruturado para perfil fixo de Clínica/Equiparação
+        // Formatadores reutilizados (criar Intl.NumberFormat a cada chamada é custoso)
+        const fmtCurrency0 = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+        const fmtCurrency2 = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+
+        // Referências de DOM cacheadas uma única vez (evita getElementById repetido durante a animação do slider)
+        let elRange, elRevenueLabel, elHighAliquot, elLowAliquot, elSavings, elPctDrop;
+
+        // Constantes do simulador (perfil fixo Clínica/Equiparação)
+        const SIM_HIGH_RATE = 0.1533;
+        const SIM_LOW_RATE = 0.0825;
+        const SIM_HIGH_LABEL = "15,33% (Presumido Padrão)";
+        const SIM_LOW_LABEL = "8,25% (Equiparação Hospitalar)";
+        const SIM_PCT_DROP = `-${(((SIM_HIGH_RATE - SIM_LOW_RATE) / SIM_HIGH_RATE) * 100).toFixed(1)}%`;
+
+        function cacheSimRefs() {
+            elRange = document.getElementById('revenue-range');
+            elRevenueLabel = document.getElementById('calc-revenue-label');
+            elHighAliquot = document.getElementById('label-high-aliquot');
+            elLowAliquot = document.getElementById('label-low-aliquot');
+            elSavings = document.getElementById('calc-savings');
+            elPctDrop = document.getElementById('calc-percentage-drop');
+            // Labels fixos: definidos uma vez, não mudam ao mover o slider
+            elHighAliquot.innerText = SIM_HIGH_LABEL;
+            elLowAliquot.innerText = SIM_LOW_LABEL;
+            elPctDrop.innerText = SIM_PCT_DROP;
+        }
+
         function calculateAliquots() {
-            const rangeVal = parseInt(document.getElementById('revenue-range').value);
-            document.getElementById('calc-revenue-label').innerText = rangeVal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
-
-            const highRate = 0.1533; 
-            const lowRate = 0.0825;  
-            const highLabel = "15,33% (Presumido Padrão)";
-            const lowLabel = "8,25% (Equiparação Hospitalar)";
-
-            const taxHigh = rangeVal * highRate;
-            const taxLow = rangeVal * lowRate;
-            const savingsMonthly = taxHigh - taxLow;
-            const savingsAnnual = savingsMonthly * 12;
-
-            document.getElementById('label-high-aliquot').innerText = highLabel;
-            document.getElementById('label-low-aliquot').innerText = lowLabel;
-            document.getElementById('calc-savings').innerText = savingsAnnual.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-
-            const percentageDrop = ((highRate - lowRate) / highRate) * 100;
-            document.getElementById('calc-percentage-drop').innerText = `-${percentageDrop.toFixed(1)}%`;
+            const rangeVal = parseInt(elRange.value);
+            elRevenueLabel.innerText = fmtCurrency0.format(rangeVal);
+            const savingsAnnual = (rangeVal * SIM_HIGH_RATE - rangeVal * SIM_LOW_RATE) * 12;
+            elSavings.innerText = fmtCurrency2.format(savingsAnnual);
         }
 
         // Sistema expansível estilo FAQ para as soluções da 5ª página
@@ -1260,59 +1201,62 @@
         }
 
         function autoMoveSlider() {
-            const slider = document.getElementById('revenue-range');
-            let val = parseInt(slider.value);
+            let val = parseInt(elRange.value);
             let target = 80000;
             let direction = 1;
-            
-            const move = setInterval(() => {
-                val += (2500 * direction);
-                slider.value = val;
-                calculateAliquots();
-                
-                if (val >= target && direction === 1) {
-                    direction = -1;
-                    target = 30000;
-                } else if (val <= target && direction === -1) {
-                    clearInterval(move);
+            let lastTime = 0;
+            const STEP_MS = 50; // mesmo ritmo do setInterval original
+
+            function frame(now) {
+                if (now - lastTime >= STEP_MS) {
+                    lastTime = now;
+                    val += (2500 * direction);
+                    elRange.value = val;
+                    calculateAliquots();
+
+                    if (val >= target && direction === 1) {
+                        direction = -1;
+                        target = 30000;
+                    } else if (val <= target && direction === -1) {
+                        return; // encerra a animação
+                    }
                 }
-            }, 50);
+                requestAnimationFrame(frame);
+            }
+            requestAnimationFrame(frame);
         }
 
         function initScrollAnimations() {
-            const revealObserver = new IntersectionObserver((entries) => {
+            const revealObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                        
-                        const cascadeItems = entry.target.querySelectorAll('.cascade-item');
-                        if (cascadeItems.length > 0) {
-                            cascadeItems.forEach((item, index) => {
-                                setTimeout(() => {
-                                    item.classList.add('active');
-                                }, index * 120);
-                            });
-                        }
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('active');
 
-                        const counters = entry.target.querySelectorAll('.count-up');
-                        if (counters.length > 0) {
-                            counters.forEach(counter => {
-                                const target = +counter.getAttribute('data-target');
-                                let count = 0;
-                                const speed = target / 30;
-                                const updateCount = () => {
-                                    count += speed;
-                                    if (count < target) {
-                                        counter.innerText = Math.floor(count);
-                                        setTimeout(updateCount, 25);
-                                    } else {
-                                        counter.innerText = target;
-                                    }
-                                };
-                                updateCount();
-                            });
-                        }
-                    }
+                    const cascadeItems = entry.target.querySelectorAll('.cascade-item');
+                    cascadeItems.forEach((item, index) => {
+                        setTimeout(() => item.classList.add('active'), index * 120);
+                    });
+
+                    const counters = entry.target.querySelectorAll('.count-up');
+                    counters.forEach(counter => {
+                        const target = +counter.getAttribute('data-target');
+                        const duration = 750; // ms (equivalente ao ritmo anterior)
+                        let startTime = 0;
+                        const tick = (now) => {
+                            if (!startTime) startTime = now;
+                            const progress = Math.min((now - startTime) / duration, 1);
+                            counter.innerText = Math.floor(progress * target);
+                            if (progress < 1) {
+                                requestAnimationFrame(tick);
+                            } else {
+                                counter.innerText = target;
+                            }
+                        };
+                        requestAnimationFrame(tick);
+                    });
+
+                    // Já animou: para de observar este elemento (libera CPU)
+                    observer.unobserve(entry.target);
                 });
             }, { threshold: 0.12 });
 
@@ -1320,6 +1264,7 @@
         }
 
         window.onload = function() {
+            cacheSimRefs();
             calculateAliquots();
             initScrollAnimations();
             setTimeout(autoMoveSlider, 1000);
